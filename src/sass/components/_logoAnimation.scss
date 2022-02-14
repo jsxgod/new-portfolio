@@ -1,17 +1,19 @@
 .logo-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
   .logo-wrapper {
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    .logo {
+    .drawn-logo {
       scale: 0.4;
       * {
         stroke: $logoOutlineColor;
       }
       path {
-        opacity: 0;
         stroke-dasharray: 2000; // one big stroke
         stroke-dashoffset: 2000; // offset to hide the whole shape
         animation: reveal 1s ease-in forwards, draw 2s linear forwards;
@@ -22,10 +24,12 @@
           stroke-dashoffset: 0;
         }
       }
-      @keyframes reveal {
-        to {
-          opacity: 1;
-        }
+    }
+    .logo {
+      scale: 0.4;
+      path {
+        stroke: none;
+        fill: $logoOutlineColor;
       }
     }
   }
