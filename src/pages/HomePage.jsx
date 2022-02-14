@@ -1,10 +1,21 @@
-import React from "react";
-import { LogoAnimation } from "../components";
+import { AnimatePresence, motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { LogoAnimation, Navbar } from "../components";
 
 const HomePage = () => {
+  const [showAnimation, setShowAnimation] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowAnimation(false);
+    }, 3000);
+  }, []);
+
   return (
     <div className="home-page">
-      <LogoAnimation />
+      <AnimatePresence exitBeforeEnter>
+        {showAnimation ? <LogoAnimation key="logo" /> : <Navbar key="navbar" />}
+      </AnimatePresence>
     </div>
   );
 };
