@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { LogoAnimation, Navbar } from "../components";
 
@@ -8,7 +8,7 @@ const HomePage = () => {
   useEffect(() => {
     setTimeout(() => {
       setShowAnimation(false);
-    }, 3000);
+    }, 2000);
   }, []);
 
   return (
