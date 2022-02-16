@@ -14,25 +14,25 @@
   &.up {
     &::after {
       transform: translateY(100%);
-      animation: in-up 0.6s 0s, out-up 0.6s 0.6s;
+      animation: in-up $blockReveal 0s, out-up $blockReveal $blockReveal;
     }
   }
   &.down {
     &::after {
       transform: translateY(-100%);
-      animation: in-down 0.6s 0s, out-down 0.6s 0.6s;
+      animation: in-down $blockReveal 0s, out-down $blockReveal $blockReveal;
     }
   }
   &.left {
     &::after {
       transform: translateX(100%);
-      animation: in-left 0.6s 0s, out-left 0.6s 0.6s;
+      animation: in-left $blockReveal 0s, out-left $blockReveal $blockReveal;
     }
   }
   &.right {
     &::after {
       transform: translateX(-100%);
-      animation: in-right 0.6s 0s, out-right 0.6s 0.6s;
+      animation: in-right $blockReveal 0s, out-right $blockReveal $blockReveal;
     }
   }
 }
