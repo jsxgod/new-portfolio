@@ -1,43 +1,59 @@
 import React, { useState } from "react";
 import { ReactComponent as Logo } from "../assets/logo_outline.svg";
+import { motion } from "framer-motion";
 
-const wrapperVariants = {
-  hidden: {
-    opacity: 0,
-  },
+const navbarLinks = ["work", "projects", "contact", "cv"];
+
+const staggerVariants = {
+  hidden: {},
   show: {
-    opacity: 1,
     transition: {
       staggerChildren: 0.1,
-      delayChildren: 1,
+      delayChildren: 0,
     },
   },
-  exit: {
-    y: -90,
-  },
+  exit: {},
 };
 
-const childrenVariants = {
+const fadeInOutVariants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 100,
-    transition: { ease: [0.6, 0.05, -0.01, 0.99] },
+    transition: { duration: 5 },
   },
   exit: { opacity: 0 },
 };
 
 const Navbar = () => {
+  const [showChildren, setShowChildren] = useState(false);
+
   return (
-    <nav className="navbar-wrapper block-reveal up">
-      <div className="logo-wrapper">
+    <nav
+      className="navbar-wrapper block-reveal up"
+      onAnimationEnd={() => setShowChildren(true)}
+    >
+      <motion.div
+        variants={fadeInOutVariants}
+        initial="hidden"
+        animate={showChildren ? "show" : ""}
+        exit="exit"
+        className="logo-wrapper"
+      >
         <Logo className="logo-small" />
-      </div>
-      <ul className="links-container">
-        <li className="navbar-link">work</li>
-        <li className="navbar-link">projects</li>
-        <li className="navbar-link">contact</li>
-        <li className="navbar-link">cv</li>
-      </ul>
+      </motion.div>
+      <motion.ul
+        variants={staggerVariants}
+        initial="hidden"
+        animate={showChildren ? "show" : ""}
+        exit="exit"
+        className="links-container"
+      >
+        {navbarLinks.map((link) => (
+          <motion.li variants={fadeInOutVariants} className="navbar-link">
+            {link}
+          </motion.li>
+        ))}
+      </motion.ul>
     </nav>
   );
 };
