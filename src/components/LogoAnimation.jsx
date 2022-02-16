@@ -7,8 +7,8 @@ const variants = {
   show: {
     opacity: 1,
     transition: {
-      delay: 0.5,
-      duration: 1,
+      delay: 0.25,
+      duration: 0.6,
       ease: [0.6, 0.05, -0.01, 0.99],
     },
   },
