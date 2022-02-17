@@ -39,7 +39,15 @@ const Navbar = () => {
         exit="exit"
         className="logo-wrapper"
       >
-        <Logo className="logo-small" />
+        <Logo
+          className="logo-small"
+          onMouseEnter={() =>
+            document.querySelector(".custom-cursor").classList.add("big")
+          }
+          onMouseLeave={() =>
+            document.querySelector(".custom-cursor").classList.remove("big")
+          }
+        />
       </motion.div>
       <motion.ul
         variants={staggerVariants}
@@ -49,7 +57,17 @@ const Navbar = () => {
         className="links-container"
       >
         {navbarLinks.map((link) => (
-          <motion.li variants={fadeInOutVariants} className="navbar-link">
+          <motion.li
+            key={link}
+            variants={fadeInOutVariants}
+            className="navbar-link"
+            onMouseEnter={() =>
+              document.querySelector(".custom-cursor").classList.add("big")
+            }
+            onMouseLeave={() =>
+              document.querySelector(".custom-cursor").classList.remove("big")
+            }
+          >
             {link}
           </motion.li>
         ))}
