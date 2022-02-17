@@ -1,21 +1,18 @@
-import { AnimatePresence } from "framer-motion";
 import React, { useEffect, useState } from "react";
-import { LogoAnimation, Navbar } from "../components";
+import { Navbar, Introduction } from "../components";
 
 const HomePage = () => {
-  const [showAnimation, setShowAnimation] = useState(true);
-
+  const [showIntroduction, setShowIntroduction] = useState(false);
   useEffect(() => {
     setTimeout(() => {
-      setShowAnimation(false);
-    }, 2000);
+      setShowIntroduction(true);
+    }, 1350);
   }, []);
 
   return (
     <div className="home-page">
-      <AnimatePresence exitBeforeEnter>
-        {showAnimation ? <LogoAnimation key="logo" /> : <Navbar key="navbar" />}
-      </AnimatePresence>
+      <Navbar />
+      {showIntroduction && <Introduction />}
     </div>
   );
 };
