@@ -2,7 +2,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 10;
   width: 100vw;
   height: $navbarHeight;
   background-color: inherit;
@@ -30,7 +30,6 @@
         stroke: #ffffff;
       }
       &:hover {
-        cursor: pointer;
         path {
           fill: #ffffff;
           stroke: #000000;
@@ -50,7 +49,6 @@
       margin-left: 3rem;
       color: #7f7f7f;
       &:hover {
-        cursor: pointer;
         color: $secondaryColor;
       }
     }
