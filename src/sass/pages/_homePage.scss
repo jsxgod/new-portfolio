@@ -23,5 +23,28 @@
       width: 100px;
       height: 100px;
     }
+    &.copy {
+      width: 100px;
+      height: 100px;
+      &::after {
+        position: relative;
+        top: 70%;
+        left: calc(50% - 1rem);
+        color: $defaultColor;
+        content: "copy";
+        font-family: "Monument Ultra Bold";
+        font-size: 0.75rem;
+      }
+      &.copied {
+        width: 50px;
+        height: 50px;
+        background-color: $defaultColor;
+        color: $secondaryColor;
+        &::after {
+          content: "copied";
+          color: $secondaryColor;
+        }
+      }
+    }
   }
 }
