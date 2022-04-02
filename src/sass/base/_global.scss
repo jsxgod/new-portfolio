@@ -6,3 +6,10 @@ body {
   padding: 0px 100px;
   cursor: none;
 }
+
+.section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+}
