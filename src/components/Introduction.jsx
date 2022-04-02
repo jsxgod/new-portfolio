@@ -1,10 +1,8 @@
 import { motion } from "framer-motion";
-import React, { useState } from "react";
-import DevSVG from "../assets/svgs/devPerson.svg";
+import React from "react";
+import { ScrollExploreInfo } from "../components";
 
 const Introduction = () => {
-  const [showContent, setShowContent] = useState(false);
-
   const copyEmailInfo = () => {
     navigator.clipboard.writeText("kacpersmyczyk@gmail.com");
     document.querySelector(".custom-cursor").classList.add("copied");
@@ -30,14 +28,7 @@ const Introduction = () => {
           >
             <div className="text-row">Hi, I'm</div>
             <div className="text-row">
-              <span className="name">
-                Kac
-                <span className="p-wrapper">
-                  p<span className="line"></span>
-                </span>
-                er
-              </span>
-              , a software engineer
+              <span>Kacper</span>, a software engineer
             </div>
             <div className="text-row">who likes good design,</div>
             <div className="text-row">
@@ -64,18 +55,14 @@ const Introduction = () => {
             kacpersmyczyk@gmail.com
           </motion.div>
         </div>
-        <div className="right-section">
-          <div
-            className="content-wrapper block-reveal up"
-            onAnimationEnd={() => setShowContent(true)}
-          >
-            {showContent && (
-              //placeholder content
-              <img src={DevSVG} alt="" />
-            )}
-          </div>
-        </div>
       </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6 }}
+      >
+        <ScrollExploreInfo />
+      </motion.div>
     </div>
   );
 };
