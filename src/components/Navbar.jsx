@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ReactComponent as Logo } from "../assets/logo_outline.svg";
 import { motion } from "framer-motion";
 
-const navbarLinks = ["work", "projects", "contact", "cv"];
+const navbarLinks = ["about", "projects", "contact", "cv"];
 
 const staggerVariants = {
   hidden: {},
@@ -27,9 +27,33 @@ const fadeInOutVariants = {
 const Navbar = () => {
   const [showChildren, setShowChildren] = useState(false);
 
+  const [oldScrollPosition, setOldScrollPosition] = useState(0);
+  const [hide, setHide] = useState(false);
+
+  const handleScroll = () => {
+    const currentScrollPosition = window.scrollY;
+
+    if (
+      currentScrollPosition > oldScrollPosition &&
+      currentScrollPosition >= 100
+    ) {
+      setHide(true);
+    } else {
+      setHide(false);
+    }
+
+    setOldScrollPosition(currentScrollPosition);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [oldScrollPosition]);
+
   return (
     <nav
-      className="navbar-wrapper block-reveal up"
+      className={`navbar-wrapper block-reveal up ${hide ? "hide" : ""}`}
       onAnimationEnd={() => setShowChildren(true)}
     >
       <motion.div
