@@ -1,0 +1,51 @@
+.scroll-info-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -150px;
+  width: 18rem;
+  padding: 0.5rem;
+  transition: opacity transform 0.3s ease-in-out;
+  .line-wrapper {
+    span {
+      display: block;
+      border-radius: 100vw;
+      width: 100px;
+      height: 2px;
+      background-color: $secondaryColor;
+    }
+  }
+  .text-wrapper {
+    font-family: "PlusJakartaText Light";
+    color: $secondaryColor;
+  }
+}
+
+
+.animate {
+  animation: flash 4s infinite;
+  animation-delay: 1s;
+}
+
+
+@keyframes flash {
+  0% {
+    opacity: 100;
+    transform: translateY(0);
+  }
+  10% {
+    opacity: 100;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  100% {
+    opacity: 100;
+    transform: translateY(0);
+  }
+}
