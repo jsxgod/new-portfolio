@@ -37,7 +37,7 @@
             transform: translateY(0px);
           }
         }
-        &:hover {
+        &.animate-cards {
           animation-play-state: paused;
           .card {
             //open transition
