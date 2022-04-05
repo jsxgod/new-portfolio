@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { About, Navbar, Introduction } from "../components";
+import { About, Navbar, Introduction, Projects } from "../components";
 
 const HomePage = () => {
   const [showIntroduction, setShowIntroduction] = useState(false);
@@ -16,6 +16,7 @@ const HomePage = () => {
         <>
           <Introduction />
           <About />
+          <Projects />
         </>
       )}
     </div>
