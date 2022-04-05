@@ -5,11 +5,48 @@ body {
   overflow-x: hidden;
   padding: 0px 100px;
   cursor: none;
+  &.no-scroll {
+    overflow: hidden;
+  }
 }
 
-.section {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: flex-start;
+html {
+  .section {
+    min-height: 100vh;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 20px;
+    padding-top: 100px;
+  }
+  h1 {
+    font-size: 4rem;
+    font-weight: normal;
+    letter-spacing: -1px;
+  }
+  h2 {
+    font-family: "PlusJakartaText Bold";
+    font-size: 3.157rem;
+    margin-bottom: 1rem;
+  }
+  h3 {
+    font-size: 2.369rem;
+  }
+  h4 {
+    font-size: 1.777rem;
+  }
+  h5 {
+    font-weight: normal;
+    font-size: 1.333rem;
+  }
+  p {
+    font-family: "PlusJakartaText Regular";
+    font-size: 1rem;
+    line-height: 24px;
+    margin-bottom: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .hint {
+    font-size: 0.75rem;
+  }
 }
