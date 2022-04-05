@@ -86,7 +86,6 @@ const About = () => {
             }`}
             onMouseEnter={() => {
               document.querySelector(".custom-cursor").classList.add("big");
-              //document.querySelector("body").classList.add("no-scroll");
             }}
             onMouseLeave={() => {
               setAnimateCards(false);
