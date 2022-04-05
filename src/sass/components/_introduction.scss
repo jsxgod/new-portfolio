@@ -1,34 +1,28 @@
 .introduction-wrapper {
   margin-top: $navbarHeight;
   overflow: hidden;
-  .left-section {
-    padding: 100px 0px;
-    display: flex;
-    flex-direction: column;
-    grid-area: text;
-    position: relative;
+  grid-column: 1 / 13;
+  display: flex;
+  flex-direction: column;
+  position: relative;
     .text-wrapper {
-      font-size: 4rem;
       font-family: "PlusJakartaText Regular";
       margin-bottom: 2rem;
       display: flex;
       flex-direction: column;
       .text-row {
         min-width: fit-content;
-        margin-bottom: 0.25rem;
+        line-height: 1.2;
         white-space: nowrap;
         span {
           position: relative;
-          font-size: 4rem;
           font-family: "Monument Regular";
         }
       }
     }
     .email-wrapper {
       width: fit-content;
-      font-size: 1.25rem;
-      font-family: "PlusJakartaText Light";
       padding: 0 1rem 1rem 0;
+      font-family: "PlusJakartaText Light";
     }
-  }
 }
