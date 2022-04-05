@@ -12,7 +12,7 @@ const App = () => {
   useEffect(() => {
     setTimeout(() => {
       setShowAnimation(false);
-    }, 2000);
+    }, 3000);
   }, []);
 
   const moveCursor = (event) => {
@@ -26,7 +26,7 @@ const App = () => {
 
   return (
     <div className="App" onMouseMove={(event) => moveCursor(event)}>
-      <div className="custom-cursor" ref={customCursor}></div>
+      <div className="custom-cursor enabled" ref={customCursor}></div>
       <AnimatePresence exitBeforeEnter>
         {showAnimation ? (
           <LogoAnimation key="logo" />
