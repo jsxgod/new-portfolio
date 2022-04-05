@@ -2,12 +2,13 @@
   position: absolute;
   top: 0;
   left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .logo-wrapper {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 40rem;
     .drawn-logo {
       scale: 0.4;
       * {
@@ -26,7 +27,6 @@
       }
     }
     .logo {
-      scale: 0.4;
       path {
         stroke: none;
         fill: $logoOutlineColor;
