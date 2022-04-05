@@ -15,46 +15,52 @@ const Introduction = () => {
   return (
     <div className="section">
       <div className="introduction-wrapper">
-        <div className="left-section">
-          <motion.div
-            initial={{ opacity: 0, y: "2rem" }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.6,
-              ease: [0.6, 0.05, -0.01, 0.99],
-              delay: 0.6,
-            }}
-            className="text-wrapper"
-          >
-            <div className="text-row">Hi, I'm</div>
-            <div className="text-row">
+        <motion.div
+          initial={{ opacity: 0, y: "2rem" }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.6,
+            ease: [0.6, 0.05, -0.01, 0.99],
+            delay: 0.6,
+          }}
+          className="text-wrapper"
+        >
+          <div className="text-row">
+            <h1>Hi, I'm</h1>
+          </div>
+          <div className="text-row">
+            <h1>
               <span>Kacper</span>, a software engineer
-            </div>
-            <div className="text-row">who likes good design,</div>
-            <div className="text-row">
+            </h1>
+          </div>
+          <div className="text-row">
+            <h1>who likes good design,</h1>
+          </div>
+          <div className="text-row">
+            <h1>
               coding stuff for the <span>web</span>.
-            </div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: "1rem" }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.6,
-              ease: [0.6, 0.05, -0.01, 0.99],
-              delay: 0.9,
-            }}
-            className="email-wrapper"
-            onMouseEnter={() =>
-              document.querySelector(".custom-cursor").classList.add("copy")
-            }
-            onMouseLeave={() =>
-              document.querySelector(".custom-cursor").classList.remove("copy")
-            }
-            onClick={() => copyEmailInfo()}
-          >
-            kacpersmyczyk@gmail.com
-          </motion.div>
-        </div>
+            </h1>
+          </div>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: "1rem" }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.6,
+            ease: [0.6, 0.05, -0.01, 0.99],
+            delay: 0.9,
+          }}
+          className="email-wrapper"
+          onMouseEnter={() =>
+            document.querySelector(".custom-cursor").classList.add("copy")
+          }
+          onMouseLeave={() =>
+            document.querySelector(".custom-cursor").classList.remove("copy")
+          }
+          onClick={() => copyEmailInfo()}
+        >
+          <h5>kacpersmyczyk@gmail.com</h5>
+        </motion.div>
       </div>
       <motion.div
         initial={{ opacity: 0 }}
