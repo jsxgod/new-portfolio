@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navbar, Introduction } from "../components";
+import { About, Navbar, Introduction } from "../components";
 
 const HomePage = () => {
   const [showIntroduction, setShowIntroduction] = useState(false);
@@ -12,7 +12,12 @@ const HomePage = () => {
   return (
     <div className="home-page">
       <Navbar />
-      {showIntroduction && <Introduction />}
+      {showIntroduction && (
+        <>
+          <Introduction />
+          <About />
+        </>
+      )}
     </div>
   );
 };
