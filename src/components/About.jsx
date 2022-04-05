@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useEffect } from "react/cjs/react.production.min";
 
 const cardOffsets = [5, 0, -5];
 
@@ -15,10 +14,11 @@ const About = () => {
 
   const [hideIcon, setHideIcon] = useState(false);
   const [blockScroll, setBlockScroll] = useState(false);
+  const [animateCards, setAnimateCards] = useState(false);
 
   const handleWheel = (e) => {
     // scroll down
-    if (!blockScroll) {
+    if (!blockScroll && animateCards) {
       if (e.deltaY < 0) {
         setTechnologies((technologies) =>
           technologies.slice(1).concat(technologies.slice(0, 1))
@@ -37,6 +37,18 @@ const About = () => {
           setBlockScroll(false);
         }, 100);
       }, 100);
+    }
+  };
+
+  const handleClick = () => {
+    if (animateCards) {
+      setAnimateCards(false);
+      document.querySelector(".custom-cursor").classList.remove("scroll");
+      document.querySelector("body").classList.remove("no-scroll");
+    } else if (!animateCards) {
+      setAnimateCards(true);
+      document.querySelector(".custom-cursor").classList.add("scroll");
+      document.querySelector("body").classList.add("no-scroll");
     }
   };
 
@@ -69,17 +81,22 @@ const About = () => {
         <div className="info-wrapper technology">
           <h2>Technological stack</h2>
           <div
-            className="technology-showcase-wrapper"
+            className={`technology-showcase-wrapper ${
+              animateCards ? "animate-cards" : ""
+            }`}
             onMouseEnter={() => {
-              document.querySelector(".custom-cursor").classList.add("scroll");
-              document.querySelector("body").classList.add("no-scroll");
+              document.querySelector(".custom-cursor").classList.add("big");
+              //document.querySelector("body").classList.add("no-scroll");
             }}
             onMouseLeave={() => {
+              setAnimateCards(false);
               document
                 .querySelector(".custom-cursor")
                 .classList.remove("scroll");
+              document.querySelector(".custom-cursor").classList.remove("big");
               document.querySelector("body").classList.remove("no-scroll");
             }}
+            onClick={() => handleClick()}
             onWheel={(e) => handleWheel(e)}
           >
             {cardOffsets.map((offset, i) => (
