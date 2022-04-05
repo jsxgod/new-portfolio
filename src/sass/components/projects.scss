@@ -23,11 +23,21 @@
     row-gap: 5rem;
     min-height: 50vh;
     .project-wrapper {
+      position: relative;
       display: flex;
       justify-content: center;
       min-height: 5rem;
       padding: 2rem;
+      &:hover {
+        .image-wrapper {
+          transform: scale(1.7);
+          img {
+            transform: scale(0.8);
+          }
+        }
+      }
       h2 {
+        z-index: 2;
         height: 100%;
         display: flex;
         align-items: center;
@@ -37,6 +47,30 @@
       }
       &.right {    
         grid-column: 7 / 11;
+      }
+      .thumbnail-wrapper {
+        z-index: 3;
+        position: absolute;
+        width: 700px;   //700
+        height: 450px;  //450
+        pointer-events: none;
+        left: 0;
+        top: -100%;
+        display: flex;
+        padding: 90px 140px;
+        overflow: hidden;
+        .image-wrapper {
+          width: 100%;
+          height: 100%;
+          transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1.3);
+          overflow: hidden;
+          img {
+            position: relative;
+            top: -45px;
+            left: -70px;
+            transition: transform 1s 1s cubic-bezier(0.5, 1, 0.89, 1);
+          }
+        }
       }
     }
   }
