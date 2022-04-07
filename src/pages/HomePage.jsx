@@ -2,17 +2,19 @@ import React, { useEffect, useState } from "react";
 import { About, Navbar, Introduction, Projects } from "../components";
 
 const HomePage = () => {
-  const [showIntroduction, setShowIntroduction] = useState(false);
+  // change variable name
+  const [navbarAnimationCompleted, setNavbarAnimationCompleted] =
+    useState(false);
   useEffect(() => {
     setTimeout(() => {
-      setShowIntroduction(true);
-    }, 1350);
+      setNavbarAnimationCompleted(true);
+    }, 600);
   }, []);
 
   return (
     <div className="home-page">
       <Navbar />
-      {showIntroduction && (
+      {navbarAnimationCompleted && (
         <>
           <Introduction />
           <About />
