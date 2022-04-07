@@ -20,12 +20,12 @@ export const projectsData = [
       "https://gainbitcoin.com/wp-content/uploads/2020/04/Automatic-Fortunes-Investing-in-the-Number-One-Tech-Stock-696x449.jpg",
   },
   {
-    name: "project name 3",
+    name: "project name 5",
     thumbnail:
       "https://gainbitcoin.com/wp-content/uploads/2020/04/Automatic-Fortunes-Investing-in-the-Number-One-Tech-Stock-696x449.jpg",
   },
   {
-    name: "project name 4",
+    name: "project name 6",
     thumbnail:
       "https://gainbitcoin.com/wp-content/uploads/2020/04/Automatic-Fortunes-Investing-in-the-Number-One-Tech-Stock-696x449.jpg",
   },
