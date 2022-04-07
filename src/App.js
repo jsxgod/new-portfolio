@@ -1,19 +1,13 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { HomePage } from "./pages";
-import { LogoAnimation } from "./components";
-import { AnimatePresence } from "framer-motion";
+import { LogoButton } from "./components";
+import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
 
 import "./sass/main.scss";
 
 const App = () => {
-  const [showAnimation, setShowAnimation] = useState(true);
+  const [showSite, setShowSite] = useState(false);
   const customCursor = useRef(null);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setShowAnimation(false);
-    }, 3000);
-  }, []);
 
   const moveCursor = (event) => {
     try {
@@ -24,16 +18,29 @@ const App = () => {
     }
   };
 
+  const handleProgressToSite = () => {
+    setShowSite(true);
+    document.querySelector(".custom-cursor").classList.remove("big");
+  };
+
   return (
     <div className="App" onMouseMove={(event) => moveCursor(event)}>
-      <div className="custom-cursor enabled" ref={customCursor}></div>
-      <AnimatePresence exitBeforeEnter>
-        {showAnimation ? (
-          <LogoAnimation key="logo" />
-        ) : (
-          <HomePage key="homepage" />
-        )}
-      </AnimatePresence>
+      <motion.div
+        className="custom-cursor enabled"
+        ref={customCursor}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2 }}
+      ></motion.div>
+      <AnimateSharedLayout type="crossfade">
+        <AnimatePresence exitBeforeEnter>
+          {showSite ? (
+            <HomePage key="homepage" />
+          ) : (
+            <LogoButton key="logo" onClickHandler={handleProgressToSite} />
+          )}
+        </AnimatePresence>
+      </AnimateSharedLayout>
     </div>
   );
 };
