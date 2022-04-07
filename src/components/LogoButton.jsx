@@ -18,20 +18,35 @@ const variants = {
   },
 };
 
-const LogoAnimation = () => {
+const LogoButton = ({ onClickHandler }) => {
   return (
+    /*
     <motion.div
+
+      className="logo-animation"
+    >*/
+    <motion.div
+      className="section"
+      style={{ paddingTop: 0 }}
       variants={variants}
       initial="hidden"
       animate="show"
       exit="hide"
-      className="logo-animation"
     >
       <div className="logo-wrapper">
-        <Logo className="logo" />
+        <Logo
+          className="logo"
+          onMouseEnter={() =>
+            document.querySelector(".custom-cursor").classList.add("big")
+          }
+          onMouseLeave={() =>
+            document.querySelector(".custom-cursor").classList.remove("big")
+          }
+          onClick={() => onClickHandler()}
+        />
       </div>
     </motion.div>
   );
 };
 
-export default LogoAnimation;
+export default LogoButton;
