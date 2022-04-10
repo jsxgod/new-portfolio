@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { About, Navbar, Introduction, Projects } from "../components";
+import { About, Navbar, Introduction, Projects, Contact } from "../components";
 
 const HomePage = () => {
   // change variable name
@@ -19,6 +19,7 @@ const HomePage = () => {
           <Introduction />
           <About />
           <Projects />
+          <Contact />
         </>
       )}
     </div>
