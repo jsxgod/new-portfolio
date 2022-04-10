@@ -2,6 +2,7 @@
   width: 100vw;
   background-color: $backgroundColor;
   padding: 0px 100px;
+  height: 1000vh;
 }
 .custom-cursor {
   &.enabled {
@@ -21,6 +22,10 @@
     &.big {
       width: 100px;
       height: 100px;
+    }
+    &.medium {
+      width: 75px;
+      height: 75px;
     }
     &.copy {
       width: 100px;
