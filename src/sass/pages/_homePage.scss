@@ -17,7 +17,7 @@
     mix-blend-mode: difference;
     border-radius: 50%;
     pointer-events: none;
-    transition: width 0.4s ease-out, height 0.4s ease-out;
+    transition: width 0.4s ease-out, height 0.4s ease-out, border 0.3s ease-in-out, background-color 0.4s ease-in-out;
     transform-origin: center;
     &.big {
       width: 100px;
@@ -48,6 +48,19 @@
           content: "copied";
           color: $secondaryColor;
         }
+      }
+    }
+    &.explore {
+      width: 100px;
+      height: 100px;
+      &::after {
+        position: relative;
+        top: 70%;
+        left: calc(50% - 27px);
+        color: $defaultColor;
+        content: "explore";
+        font-family: "Monument Ultra Bold";
+        font-size: 0.75rem;
       }
     }
     &.scroll {
