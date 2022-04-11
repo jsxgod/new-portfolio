@@ -25,10 +25,6 @@ const Contact = () => {
         <ambientLight intensity={0.5} />
         <directionalLight />
       </MotionCanvas>
-      <motion.span
-        className="animation-trigger"
-        style={{ width: "1px", height: "1px", backgroundColor: "red" }}
-      ></motion.span>
     </motion.div>
   );
 };
