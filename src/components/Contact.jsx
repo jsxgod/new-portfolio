@@ -4,31 +4,32 @@ import { motion } from "framer-motion";
 import { LayoutCamera, MotionCanvas } from "framer-motion-3d";
 
 const Contact = () => {
-  const [showCanvas, setShowCanvas] = useState(false);
+  const [showAnimation, setShowAnimation] = useState(false);
+
   return (
-    <>
-      <button onClick={() => setShowCanvas(!showCanvas)}>ON</button>
-      {showCanvas && (
-        <motion.div
-          className="section"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2 }}
-        >
-          <MotionCanvas className="contact-canvas">
-            <LayoutCamera
-              initial={false}
-              animate={{ x: 0, y: 14, z: 8.5, fov: 90 }}
-            />
-            <Suspense fallback={null}>
-              <PlaneFlight />
-            </Suspense>
-            <ambientLight intensity={0.5} />
-            <directionalLight />
-          </MotionCanvas>
-        </motion.div>
-      )}
-    </>
+    <motion.div
+      className="section"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 2 }}
+      onViewportEnter={() => setShowAnimation(true)}
+      onViewportLeave={() => setShowAnimation(false)}
+      viewport={{ amount: 0.8, once: true }}
+    >
+      <MotionCanvas className="contact-canvas">
+        <LayoutCamera
+          initial={false}
+          animate={{ x: 0, y: 14, z: 8.5, fov: 80 }}
+        />
+        <Suspense fallback={null}>{showAnimation && <PlaneFlight />}</Suspense>
+        <ambientLight intensity={0.5} />
+        <directionalLight />
+      </MotionCanvas>
+      <motion.span
+        className="animation-trigger"
+        style={{ width: "1px", height: "1px", backgroundColor: "red" }}
+      ></motion.span>
+    </motion.div>
   );
 };
 
