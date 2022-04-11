@@ -48,11 +48,11 @@ const fadeUpVariants = {
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.3, ease: [0.6, 0.05, -0.01, 0.99], delay: 0.3 },
+    transition: { duration: 0.6, ease: [0.6, 0.05, -0.01, 0.99], delay: 0.6 },
   },
   exit: {
     opacity: 0,
-    transition: { duration: 0.2, ease: [0.6, 0.05, -0.01, 0.99] },
+    transition: { duration: 0.3, ease: [0.6, 0.05, -0.01, 0.99] },
   },
 };
 
@@ -115,8 +115,12 @@ const Projects = () => {
           <h1>Projects</h1>
         </div>
         {showDetails && (
-          <div
+          <motion.div
             className="close-button-wrapper"
+            initial="hide"
+            animate="show"
+            exit="exit"
+            variants={fadeUpVariants}
             onMouseEnter={() => {
               document.querySelector(".custom-cursor").classList.add("big");
             }}
@@ -129,7 +133,7 @@ const Projects = () => {
             }}
           >
             <span>X</span>
-          </div>
+          </motion.div>
         )}
         <AnimatePresence exitBeforeEnter>
           {!showDetails ? (
@@ -258,12 +262,14 @@ const Projects = () => {
                 className="info-bean bottom-link live"
                 variants={fadeUpVariants}
                 onMouseEnter={() => {
-                  document.querySelector(".custom-cursor").classList.add("big");
+                  document
+                    .querySelector(".custom-cursor")
+                    .classList.add("medium");
                 }}
                 onMouseLeave={() => {
                   document
                     .querySelector(".custom-cursor")
-                    .classList.remove("big");
+                    .classList.remove("medium");
                 }}
               >
                 <a href="/">LIVE</a>
@@ -272,12 +278,14 @@ const Projects = () => {
                 className="info-bean bottom-link repo"
                 variants={fadeUpVariants}
                 onMouseEnter={() => {
-                  document.querySelector(".custom-cursor").classList.add("big");
+                  document
+                    .querySelector(".custom-cursor")
+                    .classList.add("medium");
                 }}
                 onMouseLeave={() => {
                   document
                     .querySelector(".custom-cursor")
-                    .classList.remove("big");
+                    .classList.remove("medium");
                 }}
               >
                 <a href="/">REPO</a>
