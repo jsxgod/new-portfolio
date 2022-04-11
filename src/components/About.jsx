@@ -85,14 +85,16 @@ const About = () => {
               animateCards ? "animate-cards" : ""
             }`}
             onMouseEnter={() => {
-              document.querySelector(".custom-cursor").classList.add("big");
+              document.querySelector(".custom-cursor").classList.add("explore");
             }}
             onMouseLeave={() => {
               setAnimateCards(false);
               document
                 .querySelector(".custom-cursor")
                 .classList.remove("scroll");
-              document.querySelector(".custom-cursor").classList.remove("big");
+              document
+                .querySelector(".custom-cursor")
+                .classList.remove("explore");
               document.querySelector("body").classList.remove("no-scroll");
             }}
             onClick={() => handleClick()}
