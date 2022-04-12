@@ -27,7 +27,7 @@ const LogoButton = ({ onClickHandler }) => {
     >*/
     <motion.div
       className="section"
-      style={{ paddingTop: 0 }}
+      style={{ paddingTop: 0, marginBottom: 0 }}
       variants={variants}
       initial="hidden"
       animate="show"
