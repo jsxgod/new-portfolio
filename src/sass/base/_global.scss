@@ -18,6 +18,10 @@ html {
     grid-template-columns: repeat(12, 1fr);
     column-gap: 20px;
     padding-top: 100px;
+    margin-bottom: 100px;
+    &:last-of-type {
+      margin-bottom: 100px;
+    }
   }
   h1 {
     font-size: 4rem;
