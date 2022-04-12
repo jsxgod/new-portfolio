@@ -3,6 +3,8 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import { projectsData } from "../data/projectsData";
 
+import FadeInOutWrapper from "./FadeInOutWrapper";
+
 const textLeftVariants = {
   rest: {
     x: 0,
@@ -49,6 +51,24 @@ const fadeUpVariants = {
     opacity: 1,
     y: 0,
     transition: { duration: 0.6, ease: [0.6, 0.05, -0.01, 0.99], delay: 0.6 },
+  },
+  exit: {
+    opacity: 0,
+    transition: { duration: 0.3, ease: [0.6, 0.05, -0.01, 0.99] },
+  },
+};
+
+const fadeInVariants = {
+  hide: {
+    opacity: 0,
+  },
+  show: {
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: [0.6, 0.05, -0.01, 0.99],
+      delay: 1,
+    },
   },
   exit: {
     opacity: 0,
@@ -112,7 +132,9 @@ const Projects = () => {
     <div className="section">
       <div className="projects-wrapper">
         <div className="header-wrapper">
-          <h1>Projects</h1>
+          <FadeInOutWrapper once={false}>
+            <h2>Projects</h2>
+          </FadeInOutWrapper>
         </div>
         {showDetails && (
           <motion.div
@@ -120,19 +142,22 @@ const Projects = () => {
             initial="hide"
             animate="show"
             exit="exit"
-            variants={fadeUpVariants}
             onMouseEnter={() => {
-              document.querySelector(".custom-cursor").classList.add("big");
+              document.querySelector(".custom-cursor").classList.add("medium");
             }}
             onMouseLeave={() => {
-              document.querySelector(".custom-cursor").classList.remove("big");
+              document
+                .querySelector(".custom-cursor")
+                .classList.remove("medium");
             }}
             onClick={() => {
-              document.querySelector(".custom-cursor").classList.remove("big");
+              document
+                .querySelector(".custom-cursor")
+                .classList.remove("medium");
               setShowDetails(false);
             }}
           >
-            <span>X</span>
+            <motion.span variants={fadeUpVariants}>X</motion.span>
           </motion.div>
         )}
         <AnimatePresence exitBeforeEnter>
@@ -195,7 +220,11 @@ const Projects = () => {
                       i % 2 === 0 ? textLeftVariants : textRightVariants
                     }
                   >
-                    {project.name}
+                    {
+                      <FadeInOutWrapper once={false}>
+                        project.name
+                      </FadeInOutWrapper>
+                    }
                   </motion.h2>
                 </motion.div>
               ))}
@@ -214,6 +243,7 @@ const Projects = () => {
               >
                 {projectsData[selectedProject].name}
               </motion.h2>
+              {/*
               <motion.div
                 className="project-type-wrapper"
                 variants={fadeUpVariants}
@@ -228,7 +258,32 @@ const Projects = () => {
                 >
                   <span className="info">{`info-${i}`}</span>
                 </motion.div>
-              ))}
+              ))}*/}
+              <motion.div
+                className="carousel-wrapper"
+                variants={fadeInVariants}
+              >
+                <div className="carousel left play">
+                  <span>front-end</span>
+                  <span>design</span>
+                  <span>framer-motion</span>
+                  <span>sass</span>
+                  <span>javascript</span>
+                  <span>react</span>
+                  <span>blender</span>
+                  <span>three.js</span>
+                </div>
+                <motion.div className="carousel play" variants={fadeUpVariants}>
+                  <span>front-end</span>
+                  <span>design</span>
+                  <span>framer-motion</span>
+                  <span>sass</span>
+                  <span>javascript</span>
+                  <span>react</span>
+                  <span>blender</span>
+                  <span>three.js</span>
+                </motion.div>
+              </motion.div>
               <motion.div
                 className="description-wrapper"
                 variants={fadeUpVariants}
