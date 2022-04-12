@@ -70,7 +70,7 @@ const Navbar = () => {
 
   return (
     <>
-      {hide && true && (
+      {hide && (
         <>
           <motion.div className="side-menu-logo">
             <motion.div
