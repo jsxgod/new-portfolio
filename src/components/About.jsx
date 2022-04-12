@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import FadeInOutWrapper from "./FadeInOutWrapper";
 
 const cardOffsets = [5, 0, -5];
 
@@ -57,29 +58,35 @@ const About = () => {
       <div className="about-me-wrapper">
         <div className="info-wrapper text">
           <div className="text-wrapper">
-            <h2>About me</h2>
-            <p>
-              I'm a web developer – learn more about me and my interests. I'm
-              available for web projects and based in Wrocław, Poland. Feel free
-              to get in touch at the bottom of the page if you're interested in
-              working together.
-            </p>
+            <FadeInOutWrapper once={false}>
+              <h2>About me</h2>
+              <p>
+                I'm a web developer – learn more about me and my interests. I'm
+                available for web projects and based in Wrocław, Poland. Feel
+                free to get in touch at the bottom of the page if you're
+                interested in working together.
+              </p>
+            </FadeInOutWrapper>
           </div>
           <div className="text-wrapper">
-            <h2>Education</h2>
-            <p>
-              I studied computer science at the Wrocław University of Science
-              and Technology. There I have learned about topics ranging from
-              pure mathematics (algebra, calculus, discrete mathematics, logic,
-              statistics) through various low and high level programming
-              languages (C, C++, Java, Javascript, Python, GO, Julia, Prolog,
-              Assembly) as well as databases, data analysis or even compiler
-              design and implementation.
-            </p>
+            <FadeInOutWrapper once={false}>
+              <h2>Education</h2>
+              <p>
+                I studied computer science at the Wrocław University of Science
+                and Technology. There I have learned about topics ranging from
+                pure mathematics (algebra, calculus, discrete mathematics,
+                logic, statistics) through various low and high level
+                programming languages (C, C++, Java, Javascript, Python, GO,
+                Julia, Prolog, Assembly) as well as databases, data analysis or
+                even compiler design and implementation.
+              </p>
+            </FadeInOutWrapper>
           </div>
         </div>
         <div className="info-wrapper technology">
-          <h2>Technological stack</h2>
+          <FadeInOutWrapper once={false}>
+            <h2>Technological stack</h2>
+          </FadeInOutWrapper>
           <div
             className={`technology-showcase-wrapper ${
               animateCards ? "animate-cards" : ""
