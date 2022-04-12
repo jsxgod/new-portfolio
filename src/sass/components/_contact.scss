@@ -2,4 +2,147 @@
   grid-column: 1 / 13;
   width: 100%;
   height: 100%;
+  position: relative;
+}
+
+.contact-header-wrapper {
+  grid-column: 1 / 4;
+  height: fit-content;
+  margin-bottom: 2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  h2 {
+    font-family: "PlusJakartaText Bold";
+  }
+}
+
+.contact-form-container {
+  position: relative;
+  grid-column: 5 / 11;
+  width: 100%;
+  height: 90%;
+  display: grid;
+  grid-template-columns: repeat(1fr, 6);
+  grid-template-rows: 3rem auto 3rem;
+  column-gap: 20px;
+  grid-template-areas:
+    ". selection-left selection-left selection-right selection-right ."
+    ". form form form form ."
+    ". send send . . .";
+  /*background: 
+  radial-gradient(
+      89.11% 89.11% at 50% 7.28%,
+      rgba(8, 8, 8, 0.42) 0%,
+      rgba(119, 119, 119, 0.06) 100%
+    ),linear-gradient(to bottom, black 50%, transparent), 
+    url(https://grainy-gradients.vercel.app/noise.svg);*/
+  &::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgb(22, 22, 22);
+    -webkit-mask: $noise,
+      radial-gradient(circle at 30% 0, transparent 10%, $defaultColor 80%) 200%
+        0/200% 100%;
+  }
+  .selection-wrapper {
+    transform: translateY(-100%);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-area: selection-left;
+    font-family: "PlusJakartaText Regular";
+    font-size: 1.333rem;
+    color: #7f7f7f;
+    transition: color 0.3s ease-in-out;
+    &:nth-of-type(2) {
+      grid-area: selection-right;
+    }
+    &:hover,
+    &.active {
+      color: $secondaryColor;
+    }
+  }
+  .form-wrapper {
+    z-index: 1;
+    grid-area: form;
+    width: 100%;
+    height: 100%;
+    padding: 1.333rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 50px 50px 50px auto;
+    column-gap: 20px;
+    row-gap: 32px;
+    background: rgba(grey, 0.05);
+    box-shadow: 0 0 4px 4px rgba(grey, 0.02);
+    .input-wrapper {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      row-gap: 4px;
+      &.name,
+      &.email,
+      &.subject {
+        grid-column: 1 / 2;
+      }
+      &.surname {
+        grid-column: 2 / 3;
+      }
+      &.message {
+        grid-column: 1 / 3;
+      }
+      .input-header {
+        font-family: "PlusJakartaText Light";
+        font-size: 0.75rem;
+      }
+      .input {
+        width: 100%;
+        font-family: "PlusJakartaText Regular";
+        font-size: 1rem;
+        color: $secondaryColor;
+        border: 1px solid rgba($secondaryColor, 0.3);
+        padding: 4px;
+        margin-bottom: 2rem;
+        background-color: transparent;
+      }
+      .message-input {
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        resize: none;
+        font-family: "PlusJakartaText Light";
+        font-size: 1rem;
+        color: $secondaryColor;
+        padding: 4px;
+        font-size: 16px;
+        line-height: 25px;
+        letter-spacing: -0.01em;
+      }
+    }
+  }
+  .send-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-area: send;
+    font-family: "PlusJakartaText Regular";
+    font-size: 1.333rem;
+    color: #7f7f7f;
+    transition: color 0.3s ease-in-out;
+    transform: translateY(100%);
+    &:hover,
+    &.clicked {
+      color: $secondaryColor;
+    }
+  }
 }
