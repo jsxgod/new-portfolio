@@ -9,7 +9,7 @@ import { useThree } from "@react-three/fiber";
 import { motion } from "framer-motion-3d";
 import { LoopOnce, Euler } from "three";
 
-export default function Model({ ...props }) {
+export default function Model({ clickHandler, ...props }) {
   const [scaleUp, setScaleUp] = useState(false);
 
   const group = useRef();
@@ -51,7 +51,7 @@ export default function Model({ ...props }) {
           }}
           transition={{ type: "tween", duration: 2, ease: [0.25, 1, 0.5, 1] }}
           onClick={() => {
-            console.log("click");
+            clickHandler();
           }}
         >
           <motion.meshStandardMaterial
