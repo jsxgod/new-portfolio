@@ -231,6 +231,11 @@ const Contact = () => {
                 <AnimatePresence>
                   <DrawingCanvas color={selectedTool} />
                 </AnimatePresence>
+                <span className="save-info">
+                  <FadeInOutWrapper>
+                    Note: save before switching back to the form !
+                  </FadeInOutWrapper>
+                </span>
               </div>
             )}
             {selectedSide === 0 ? (
@@ -289,12 +294,12 @@ const Contact = () => {
           <div className="toolbox-wrapper">
             {[
               "black",
-              "red",
+              "#c2cece",
+              "#b72124",
               "pink",
               "orange",
               "yellow",
               "lightgreen",
-              "#e1d9d1",
               "lightblue",
             ].map((color) => (
               <motion.div
