@@ -22,35 +22,34 @@
   grid-column: 5 / 11;
   width: 100%;
   height: 90%;
+  padding: 0 4rem;
   display: grid;
-  grid-template-columns: repeat(1fr, 6);
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 3rem auto 3rem;
   column-gap: 20px;
   grid-template-areas:
-    ". selection-left selection-left selection-right selection-right ."
-    ". form form form form ."
-    ". send send . . .";
-  /*background: 
-  radial-gradient(
-      89.11% 89.11% at 50% 7.28%,
-      rgba(8, 8, 8, 0.42) 0%,
-      rgba(119, 119, 119, 0.06) 100%
-    ),linear-gradient(to bottom, black 50%, transparent), 
-    url(https://grainy-gradients.vercel.app/noise.svg);*/
-  &::before {
-    content: "";
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
+    "selection-left selection-left selection-right selection-right"
+    "form form form form"
+    "send send . .";
+  &.noise {
+    &::before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: rgb(22, 22, 22);
+      -webkit-mask: $noise,
+        radial-gradient(circle at 30% 0, transparent 10%, $defaultColor 80%)
+          200% 0/200% 100%;
+    }
+  }
+  &.paper {
     background-color: rgb(22, 22, 22);
-    -webkit-mask: $noise,
-      radial-gradient(circle at 30% 0, transparent 10%, $defaultColor 80%) 200%
-        0/200% 100%;
   }
   .selection-wrapper {
-    transform: translateY(-100%);
+    transform: translateY(-110%);
     width: 100%;
     height: 100%;
     display: flex;
@@ -64,9 +63,20 @@
     &:nth-of-type(2) {
       grid-area: selection-right;
     }
-    &:hover,
     &.active {
       color: $secondaryColor;
+    }
+    span {
+      padding: 8px;
+      position: relative;
+      .underline {
+        position: absolute;
+        height: 1px;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        background-color: $secondaryColor;
+      }
     }
   }
   .form-wrapper {
@@ -88,6 +98,26 @@
       display: flex;
       flex-direction: column;
       row-gap: 4px;
+      position: relative;
+      .border {
+        position: absolute;
+        bottom: 4px;
+        left: 50%;
+        width: 10px;
+        height: 1px;
+        background-color: rgba($secondaryColor, 0);
+        transition: 0.3s;
+      }
+      &:hover {
+        cursor: none;
+      }
+      &:focus-within {
+        .border {
+          left: 0;
+          width: 100%;
+          background-color: $secondaryColor;
+        }
+      }
       &.name,
       &.email,
       &.subject {
@@ -104,14 +134,22 @@
         font-size: 0.75rem;
       }
       .input {
+        position: relative;
         width: 100%;
         font-family: "PlusJakartaText Regular";
         font-size: 1rem;
         color: $secondaryColor;
-        border: 1px solid rgba($secondaryColor, 0.3);
+        border: none;
+        border-bottom: 1px solid rgba($secondaryColor, 0.3);
         padding: 4px;
         margin-bottom: 2rem;
         background-color: transparent;
+        &:hover {
+          cursor: none;
+        }
+        &:focus {
+          outline: none;
+        }
       }
       .message-input {
         width: 100%;
@@ -121,11 +159,86 @@
         font-family: "PlusJakartaText Light";
         font-size: 1rem;
         color: $secondaryColor;
+        border: 1px solid rgba($secondaryColor, 0.3);
         padding: 4px;
         font-size: 16px;
         line-height: 25px;
         letter-spacing: -0.01em;
+        transition: border-color 0.3s;
+        &:focus {
+          outline: none;
+          border-color: $secondaryColor;
+        }
+        &:hover {
+          cursor: none;
+        }
       }
+    }
+  }
+  .paper-note-wrapper {
+    grid-area: form;
+    width: 100%;
+    height: 100%;
+    padding: 1.333rem;
+    position: relative;
+    background-image: repeating-linear-gradient(
+      white 0px,
+      white 24px,
+      steelblue 25px
+    );
+    //red line
+    &::before {
+      content: "";
+      position: absolute;
+      left: 10%;
+      top: 0;
+      height: 100%;
+      width: 2px;
+      background: rgba(255, 0, 0, 0.3);
+    }
+    .lines {
+      position: absolute;
+      left: 0;
+      top: 0;
+      margin-top: 40px;
+      height: calc(100% - 40px);
+      width: 100%;
+      background-image: repeating-linear-gradient(
+        white 0px,
+        white 24px,
+        steelblue 25px
+      );
+    }
+    .note-input {
+      width: 100%;
+      height: 100%;
+      max-height: 100%;
+      background-color: transparent;
+      resize: none;
+      font-family: "PlusJakartaText Light";
+      font-size: 1rem;
+      color: $defaultColor;
+      border: none;
+      padding: 2px 10%;
+      font-size: 16px;
+      line-height: 25px;
+      letter-spacing: -0.01em;
+      transition: border-color 0.3s;
+      &:focus {
+        outline: none;
+        border-color: $secondaryColor;
+      }
+      &:hover {
+        cursor: none;
+      }
+    }
+    canvas {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: transparent;
     }
   }
   .send-wrapper {
@@ -135,14 +248,51 @@
     justify-content: center;
     align-items: center;
     grid-area: send;
-    font-family: "PlusJakartaText Regular";
-    font-size: 1.333rem;
-    color: #7f7f7f;
-    transition: color 0.3s ease-in-out;
     transform: translateY(100%);
-    &:hover,
-    &.clicked {
-      color: $secondaryColor;
+    .send-button {
+      background-color: inherit;
+      border: none;
+      outline: none;
+
+      font-family: "PlusJakartaText Regular";
+      font-size: 1.333rem;
+      color: #7f7f7f;
+      transition: color 0.3s ease-in-out;
+      &:hover,
+      &.clicked {
+        color: $secondaryColor;
+      }
+      &:hover {
+        cursor: none;
+      }
+    }
+  }
+}
+
+.toolbox-wrapper {
+  grid-column: 11 / 13;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  overflow: hidden;
+  transform: translateY(-50px);
+  .pen-wrapper {
+    width: 100%;
+    height: 12.5%;
+    position: relative;
+    overflow: visible;
+    svg {
+      position: absolute;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      transform: rotate(45deg) scale(2);
+      pointer-events: none;
+      g {
+      }
     }
   }
 }
