@@ -51,6 +51,7 @@ export default function Model({ clickHandler, ...props }) {
           }}
           transition={{ type: "tween", duration: 2, ease: [0.25, 1, 0.5, 1] }}
           onClick={() => {
+            document.querySelector(".custom-cursor").classList.remove("medium");
             clickHandler();
           }}
         >
