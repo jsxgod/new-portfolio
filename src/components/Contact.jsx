@@ -1,10 +1,12 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import PlaneFlight from "../assets/3D/PlaneFlight";
 import { AnimatePresence, motion } from "framer-motion";
 import { LayoutCamera, MotionCanvas } from "framer-motion-3d";
 import FadeInOutWrapper from "./FadeInOutWrapper";
 import { ReactComponent as Crayon } from "../assets/crayon.svg";
 import DrawingCanvas from "./DrawingCanvas";
+
+import * as htmlToImage from "html-to-image";
 
 const CustomLabel = (props) => {
   return (
@@ -49,6 +51,9 @@ const Contact = () => {
   const [subjectValue, setSubjectValue] = useState("");
   const [messageValue, setMessageValue] = useState("");
 
+  const canvasData = useRef(null);
+  const [loadForEdit, setLoadForEdit] = useState(false);
+
   const handleShowForm = () => {
     setShowForm(true);
   };
@@ -65,11 +70,70 @@ const Contact = () => {
       email: emailValue,
       subject: subjectValue,
       message: messageValue,
+      canvasData,
     };
     console.log(formData);
   };
 
-  const handleSaveImage = () => {};
+  const handleSaveImage = () => {
+    //var canvas = document.getElementById("drawing-board");
+    //var dataURL = canvas.toDataURL("image/png", 1.0);
+    //setCanvasData(dataURL);
+    var node = document.getElementById("drawing-board");
+
+    htmlToImage
+      .toBlob(node)
+      .then(function (blob) {
+        var img = new Image();
+        img.src = URL.createObjectURL(blob);
+        setSelectedSide(0);
+        canvasData.current = img;
+        /*
+        const reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onload = () => canvasData = (reader.result);
+        */
+      })
+      .catch(function (error) {
+        console.error("oops, something went wrong!", error);
+      });
+  };
+
+  useEffect(() => {
+    setLoadForEdit(false);
+    if (!canvasData.current) {
+      return;
+    }
+    if (selectedSide === 1) {
+      return;
+    }
+    const editTooltip = document.createElement("div");
+    editTooltip.className = "edit-tooltip-wrapper";
+    const editSpan = document.createElement("span");
+    editSpan.textContent = "edit";
+    editSpan.addEventListener("click", (e) => {
+      handleEdit();
+    });
+    editSpan.addEventListener("mouseenter", (e) => {
+      document.querySelector(".custom-cursor").classList.add("medium");
+    });
+
+    editSpan.addEventListener("mouseleave", (e) => {
+      document.querySelector(".custom-cursor").classList.remove("medium");
+    });
+    editSpan.addEventListener("mousedown", (e) => {
+      document.querySelector(".custom-cursor").classList.remove("medium");
+    });
+    editTooltip.appendChild(editSpan);
+    const imageWrapper = document.querySelector(".doodle-wrapper");
+    imageWrapper.replaceChildren(...[canvasData.current, editTooltip]);
+    imageWrapper.classList.add("red-line");
+  }, [selectedSide]);
+
+  const handleEdit = () => {
+    setSelectedSide(1);
+    setLoadForEdit(true);
+  };
 
   return (
     <motion.div
@@ -175,6 +239,7 @@ const Contact = () => {
                 className="form-wrapper"
                 onSubmit={(e) => handleSubmit(e)}
               >
+                <div className="doodle-wrapper"></div>
                 <CustomLabel
                   name={"name"}
                   value={nameValue}
@@ -229,7 +294,10 @@ const Contact = () => {
             ) : (
               <div className="paper-note-wrapper">
                 <AnimatePresence>
-                  <DrawingCanvas color={selectedTool} />
+                  <DrawingCanvas
+                    color={selectedTool}
+                    initial={loadForEdit ? canvasData.current : null}
+                  />
                 </AnimatePresence>
                 <span className="save-info">
                   <FadeInOutWrapper>
