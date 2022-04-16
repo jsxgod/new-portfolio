@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-const DrawingCanvas = ({ color = "black" }) => {
+const DrawingCanvas = ({ color = "black", initial }) => {
   const [isDrawing, setIsDrawing] = useState(false);
   const canvasRef = useRef(null);
   const canvasContextRef = useRef(null);
@@ -15,6 +15,10 @@ const DrawingCanvas = ({ color = "black" }) => {
     canvasContext.scale(2, 2);
     canvasContext.lineCap = "round";
     canvasContext.lineWidth = 5;
+
+    if (initial !== null) {
+      canvasContext.drawImage(initial, 0, 0);
+    }
     canvasContextRef.current = canvasContext;
   }, []);
 
