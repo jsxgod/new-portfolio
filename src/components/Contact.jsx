@@ -3,7 +3,7 @@ import PlaneFlight from "../assets/3D/PlaneFlight";
 import { AnimatePresence, motion } from "framer-motion";
 import { LayoutCamera, MotionCanvas } from "framer-motion-3d";
 import FadeInOutWrapper from "./FadeInOutWrapper";
-import { ReactComponent as Crayon } from "../assets/crayon.svg";
+import { ReactComponent as Crayon } from "../assets/svg/crayon.svg";
 import DrawingCanvas from "./DrawingCanvas";
 
 import * as htmlToImage from "html-to-image";

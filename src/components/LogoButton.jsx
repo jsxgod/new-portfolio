@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as Logo } from "../assets/logo_outline.svg";
+import { ReactComponent as Logo } from "../assets/svg/logo_outline.svg";
 import { motion } from "framer-motion";
 
 const variants = {
