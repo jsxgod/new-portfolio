@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { CustomLabel, DrawingCanvas, FadeInOutWrapper } from "../components";
 import * as htmlToImage from "html-to-image";
+import Toolbox from "./Toolbox";
 
-const ContactForm = ({ selectedColor }) => {
+const ContactForm = ({ selectedColor, handleChangeColor }) => {
   const canvasData = useRef(null);
   const [selectedSide, setSelectedSide] = useState("left");
   const [loadForEdit, setLoadForEdit] = useState(false);
@@ -91,132 +92,18 @@ const ContactForm = ({ selectedColor }) => {
   };
 
   return (
-    <div
-      className={`contact-form-container ${
-        selectedSide === "left" ? "noise" : "paper"
-      }`}
-    >
+    <>
       <div
-        className={`selection-wrapper ${
-          selectedSide === "left" ? "active" : ""
+        className={`contact-form-container ${
+          selectedSide === "left" ? "noise" : "paper"
         }`}
       >
-        <span
-          onMouseEnter={() => {
-            document.querySelector(".custom-cursor").classList.add("medium");
-          }}
-          onMouseLeave={() => {
-            document.querySelector(".custom-cursor").classList.remove("medium");
-          }}
-          onMouseDown={() => {
-            document.querySelector(".custom-cursor").classList.remove("medium");
-          }}
-          onClick={() => setSelectedSide("left")}
+        <div
+          className={`selection-wrapper ${
+            selectedSide === "left" ? "active" : ""
+          }`}
         >
-          standard
-          {selectedSide === "left" && (
-            <motion.div className="underline" layoutId="underline"></motion.div>
-          )}
-        </span>
-      </div>
-      <div
-        className={`selection-wrapper ${
-          selectedSide === "right" ? "active" : ""
-        }`}
-      >
-        <span
-          onMouseEnter={() => {
-            document.querySelector(".custom-cursor").classList.add("medium");
-          }}
-          onMouseLeave={() => {
-            document.querySelector(".custom-cursor").classList.remove("medium");
-          }}
-          onMouseDown={() => {
-            document.querySelector(".custom-cursor").classList.remove("medium");
-          }}
-          onClick={() => setSelectedSide("right")}
-        >
-          paper
-          {selectedSide === "right" && (
-            <motion.div className="underline" layoutId="underline"></motion.div>
-          )}
-        </span>
-      </div>
-      <form
-        id="contact-form"
-        className="form-wrapper"
-        onSubmit={(e) => handleSubmit(e)}
-        style={selectedSide === "left" ? {} : { visibility: "hidden" }}
-      >
-        <div className="doodle-wrapper"></div>
-        <CustomLabel
-          name={"name"}
-          required
-          value={name}
-          handler={(e) => setName(e.target.value)}
-        ></CustomLabel>
-        <CustomLabel
-          name={"surname"}
-          value={surname}
-          handler={(e) => setSurname(e.target.value)}
-        ></CustomLabel>
-        <CustomLabel
-          name={"email"}
-          value={email}
-          required
-          handler={(e) => setEmail(e.target.value)}
-        ></CustomLabel>
-        <CustomLabel
-          name={"subject"}
-          value={subject}
-          required
-          handler={(e) => setSubject(e.target.value)}
-        ></CustomLabel>
-        <label
-          className="input-wrapper message"
-          onMouseEnter={() => {
-            document.querySelector(".custom-cursor").classList.add("medium");
-          }}
-          onMouseLeave={() => {
-            document.querySelector(".custom-cursor").classList.remove("medium");
-          }}
-          onMouseDown={() => {
-            document.querySelector(".custom-cursor").classList.remove("medium");
-          }}
-        >
-          <span className="input-header subject">Message *</span>
-          <textarea
-            className="message-input"
-            value={message}
-            required
-            spellCheck={false}
-            onChange={(e) => setMessage(e.target.value)}
-          ></textarea>
-        </label>
-      </form>
-      <div
-        className="paper-note-wrapper"
-        style={selectedSide === "right" ? {} : { visibility: "hidden" }}
-      >
-        <AnimatePresence>
-          <DrawingCanvas
-            color={selectedColor}
-            initial={loadForEdit ? canvasData.current : null}
-          />
-        </AnimatePresence>
-        <span className="save-info">
-          <FadeInOutWrapper>
-            Note: save before switching back to the form !
-          </FadeInOutWrapper>
-        </span>
-      </div>
-      {selectedSide === "left" ? (
-        <div className="send-wrapper">
-          <input
-            className="send-button"
-            type="submit"
-            value="send"
-            form="contact-form"
+          <span
             onMouseEnter={() => {
               document.querySelector(".custom-cursor").classList.add("medium");
             }}
@@ -230,32 +117,176 @@ const ContactForm = ({ selectedColor }) => {
                 .querySelector(".custom-cursor")
                 .classList.remove("medium");
             }}
-          />
-        </div>
-      ) : (
-        <div className="send-wrapper">
-          <button
-            className="send-button"
-            onMouseEnter={() => {
-              document.querySelector(".custom-cursor").classList.add("medium");
-            }}
-            onMouseLeave={() => {
-              document
-                .querySelector(".custom-cursor")
-                .classList.remove("medium");
-            }}
-            onMouseDown={() => {
-              document
-                .querySelector(".custom-cursor")
-                .classList.remove("medium");
-            }}
-            onClick={() => handleSaveImage()}
+            onClick={() => setSelectedSide("left")}
           >
-            save
-          </button>
+            standard
+            {selectedSide === "left" && (
+              <motion.div
+                className="underline"
+                layoutId="underline"
+              ></motion.div>
+            )}
+          </span>
         </div>
+        <div
+          className={`selection-wrapper ${
+            selectedSide === "right" ? "active" : ""
+          }`}
+        >
+          <span
+            onMouseEnter={() => {
+              document.querySelector(".custom-cursor").classList.add("medium");
+            }}
+            onMouseLeave={() => {
+              document
+                .querySelector(".custom-cursor")
+                .classList.remove("medium");
+            }}
+            onMouseDown={() => {
+              document
+                .querySelector(".custom-cursor")
+                .classList.remove("medium");
+            }}
+            onClick={() => setSelectedSide("right")}
+          >
+            paper
+            {selectedSide === "right" && (
+              <motion.div
+                className="underline"
+                layoutId="underline"
+              ></motion.div>
+            )}
+          </span>
+        </div>
+        <form
+          id="contact-form"
+          className="form-wrapper"
+          onSubmit={(e) => handleSubmit(e)}
+          style={selectedSide === "left" ? {} : { visibility: "hidden" }}
+        >
+          <div className="doodle-wrapper"></div>
+          <CustomLabel
+            name={"name"}
+            required
+            value={name}
+            handler={(e) => setName(e.target.value)}
+          ></CustomLabel>
+          <CustomLabel
+            name={"surname"}
+            value={surname}
+            handler={(e) => setSurname(e.target.value)}
+          ></CustomLabel>
+          <CustomLabel
+            name={"email"}
+            value={email}
+            required
+            handler={(e) => setEmail(e.target.value)}
+          ></CustomLabel>
+          <CustomLabel
+            name={"subject"}
+            value={subject}
+            required
+            handler={(e) => setSubject(e.target.value)}
+          ></CustomLabel>
+          <label
+            className="input-wrapper message"
+            onMouseEnter={() => {
+              document.querySelector(".custom-cursor").classList.add("medium");
+            }}
+            onMouseLeave={() => {
+              document
+                .querySelector(".custom-cursor")
+                .classList.remove("medium");
+            }}
+            onMouseDown={() => {
+              document
+                .querySelector(".custom-cursor")
+                .classList.remove("medium");
+            }}
+          >
+            <span className="input-header subject">Message *</span>
+            <textarea
+              className="message-input"
+              value={message}
+              required
+              spellCheck={false}
+              onChange={(e) => setMessage(e.target.value)}
+            ></textarea>
+          </label>
+        </form>
+        <div
+          className="paper-note-wrapper"
+          style={selectedSide === "right" ? {} : { visibility: "hidden" }}
+        >
+          <AnimatePresence>
+            <DrawingCanvas
+              color={selectedColor}
+              initial={loadForEdit ? canvasData.current : null}
+            />
+          </AnimatePresence>
+          <span className="save-info">
+            <FadeInOutWrapper>
+              Note: save before switching back to the form !
+            </FadeInOutWrapper>
+          </span>
+        </div>
+        {selectedSide === "left" ? (
+          <div className="send-wrapper">
+            <input
+              className="send-button"
+              type="submit"
+              value="send"
+              form="contact-form"
+              onMouseEnter={() => {
+                document
+                  .querySelector(".custom-cursor")
+                  .classList.add("medium");
+              }}
+              onMouseLeave={() => {
+                document
+                  .querySelector(".custom-cursor")
+                  .classList.remove("medium");
+              }}
+              onMouseDown={() => {
+                document
+                  .querySelector(".custom-cursor")
+                  .classList.remove("medium");
+              }}
+            />
+          </div>
+        ) : (
+          <div className="send-wrapper">
+            <button
+              className="send-button"
+              onMouseEnter={() => {
+                document
+                  .querySelector(".custom-cursor")
+                  .classList.add("medium");
+              }}
+              onMouseLeave={() => {
+                document
+                  .querySelector(".custom-cursor")
+                  .classList.remove("medium");
+              }}
+              onMouseDown={() => {
+                document
+                  .querySelector(".custom-cursor")
+                  .classList.remove("medium");
+              }}
+              onClick={() => handleSaveImage()}
+            >
+              save
+            </button>
+          </div>
+        )}
+      </div>
+      {selectedSide === "right" && (
+        <Toolbox
+          selectedColor={selectedColor}
+          handleChangeColor={handleChangeColor}
+        />
       )}
-    </div>
+    </>
   );
 };
 

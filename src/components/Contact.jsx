@@ -49,10 +49,9 @@ const Contact = () => {
           </MotionCanvas>
         ) : (
           <>
-            <ContactForm selectedColor={selectedColor} />
-            <Toolbox
+            <ContactForm
               selectedColor={selectedColor}
-              handleChangeColor={handleChangeColor}
+              handleChangeColor={setSelectedColor}
             />
           </>
         )}
