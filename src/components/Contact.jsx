@@ -3,20 +3,11 @@ import PlaneFlight from "../assets/3D/PlaneFlight";
 import { AnimatePresence, motion } from "framer-motion";
 import { LayoutCamera, MotionCanvas } from "framer-motion-3d";
 import { FadeInOutWrapper, ContactForm, Toolbox } from "../components";
-import useForm from "../hooks/useForm";
 
 const Contact = () => {
   const [playAnimation, setPlayAnimation] = useState(false);
   const [showAnimation, setShowAnimation] = useState(true);
   const [selectedColor, setSelectedColor] = useState("black");
-
-  const { formData, onChangeHandler } = useForm({
-    name: "",
-    surname: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
 
   const handleHideAnimation = () => {
     setShowAnimation(false);
@@ -58,11 +49,7 @@ const Contact = () => {
           </MotionCanvas>
         ) : (
           <>
-            <ContactForm
-              selectedColor={selectedColor}
-              formData={formData}
-              onChangeHandler={onChangeHandler}
-            />
+            <ContactForm selectedColor={selectedColor} />
             <Toolbox
               selectedColor={selectedColor}
               handleChangeColor={handleChangeColor}
