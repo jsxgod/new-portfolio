@@ -10,3 +10,5 @@ export { default as DrawingCanvas } from "./DrawingCanvas";
 export { default as ContactForm } from "./ContactForm";
 export { default as CustomLabel } from "./CustomLabel";
 export { default as Toolbox } from "./Toolbox";
+export { default as MouseInteractionWrapper } from "./MouseInteractionWrapper";
+export { default as Footer } from "./Footer";
