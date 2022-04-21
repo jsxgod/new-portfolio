@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { About, Navbar, Introduction, Projects, Contact } from "../components";
+import {
+  About,
+  Navbar,
+  Introduction,
+  Projects,
+  Contact,
+  Footer,
+} from "../components";
 
 const HomePage = () => {
   // change variable name
@@ -11,15 +18,25 @@ const HomePage = () => {
     }, 600);
   }, []);
 
+  const [sideLinksLocation, setSideLinksLocation] = useState("sidebar");
+
+  const handleChangeSideLinksLocation = (location) => {
+    setSideLinksLocation(location);
+  };
+
   return (
     <div className="home-page">
-      <Navbar />
+      <Navbar sideLinksLocation={sideLinksLocation} />
       {navbarAnimationCompleted && (
         <>
           <Introduction />
           <About />
           <Projects />
           <Contact />
+          <Footer
+            sideLinksLocation={sideLinksLocation}
+            changeLocation={handleChangeSideLinksLocation}
+          />
         </>
       )}
     </div>
