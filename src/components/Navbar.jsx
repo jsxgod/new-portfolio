@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { ReactComponent as Logo } from "../assets/svg/logo_outline.svg";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { MouseInteractionWrapper } from "../components";
 
 const navbarLinks = ["about", "projects", "contact", "cv"];
 
@@ -13,6 +15,34 @@ const staggerVariants = {
     },
   },
   exit: {},
+};
+
+const linksWrapperVariants = {
+  hidden: {
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
+  show: {
+    transition: {
+      delayChildren: 0.15,
+      staggerChildren: 0.15,
+      staggerDirection: -1,
+    },
+  },
+};
+
+const linksVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  show: {
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+      ease: [0.6, 0.05, -0.01, 0.99],
+    },
+  },
 };
 
 const fadeInOutVariants = {
@@ -41,7 +71,7 @@ const hamburgerVariants = {
   },
 };
 
-const Navbar = () => {
+const Navbar = ({ sideLinksLocation }) => {
   const [showChildren, setShowChildren] = useState(false);
 
   const [oldScrollPosition, setOldScrollPosition] = useState(0);
@@ -109,6 +139,28 @@ const Navbar = () => {
               <motion.span variants={hamburgerVariants}></motion.span>
             </motion.div>
           </motion.div>
+          <AnimatePresence>
+            {sideLinksLocation === "sidebar" && (
+              <motion.div
+                className="side-links-wrapper"
+                initial="hidden"
+                animate="show"
+                exit="hidden"
+                variants={linksWrapperVariants}
+              >
+                <motion.span className="side-link" variants={linksVariants}>
+                  <MouseInteractionWrapper size="medium">
+                    <FaGithub />
+                  </MouseInteractionWrapper>
+                </motion.span>
+                <motion.span className="side-link" variants={linksVariants}>
+                  <MouseInteractionWrapper size="medium">
+                    <FaLinkedin />
+                  </MouseInteractionWrapper>
+                </motion.span>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </>
       )}
       <nav
