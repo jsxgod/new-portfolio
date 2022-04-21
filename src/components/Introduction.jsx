@@ -13,6 +13,10 @@ const fadeUpVariants = {
     y: 0,
     transition: { duration: 0.6, ease: [0.6, 0.05, -0.01, 0.99] },
   },
+  exit: {
+    y: "-2rem",
+    transition: { duration: 0.3, ease: [0.6, 0.05, -0.01, 0.99] },
+  },
 };
 
 const Introduction = () => {
@@ -40,6 +44,7 @@ const Introduction = () => {
           <motion.div
             initial="hide"
             whileInView="show"
+            animate="exit"
             viewport={{ amount: 0.5 }}
             transition={{ staggerChildren: 0.3 }}
             className="introduction-wrapper"
