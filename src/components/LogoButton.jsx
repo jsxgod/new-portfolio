@@ -35,9 +35,19 @@ const LogoButton = ({ onClickHandler }) => {
       exit="hide"
     >
       <div className="logo-wrapper">
-        <MouseInteractionWrapper>
-          <Logo className="logo" onClick={() => onClickHandler()} />
-        </MouseInteractionWrapper>
+        <Logo
+          className="logo"
+          onMouseEnter={() => {
+            document.querySelector(".custom-cursor").classList.add("big");
+          }}
+          onMouseLeave={() => {
+            document.querySelector(".custom-cursor").classList.remove("big");
+          }}
+          onMouseDown={() => {
+            document.querySelector(".custom-cursor").classList.remove("big");
+          }}
+          onClick={() => onClickHandler()}
+        />
       </div>
     </motion.div>
   );
