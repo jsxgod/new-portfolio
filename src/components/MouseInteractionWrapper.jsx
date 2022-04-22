@@ -1,18 +1,24 @@
-const MouseInteractionWrapper = ({ children, size = "big" }) => {
+const MouseInteractionWrapper = ({
+  children,
+  addClass = "big",
+  removeClass,
+}) => {
   return (
-    <div
+    <span
       onMouseEnter={() => {
-        document.querySelector(".custom-cursor").classList.add(size);
+        document.querySelector(".custom-cursor").classList.add(addClass);
       }}
       onMouseLeave={() => {
-        document.querySelector(".custom-cursor").classList.remove(size);
+        document.querySelector(".custom-cursor").classList.remove(addClass);
       }}
       onMouseDown={() => {
-        document.querySelector(".custom-cursor").classList.remove(size);
+        document
+          .querySelector(".custom-cursor")
+          .classList.remove(removeClass !== undefined ? removeClass : addClass);
       }}
     >
       {children}
-    </div>
+    </span>
   );
 };
 
