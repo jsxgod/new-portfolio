@@ -63,11 +63,10 @@ const Footer = ({ sideLinksLocation, changeLocation }) => {
       </AnimatePresence>
       <div className="footer-credits-wrapper">
         <p>
-          <span>Design</span> & <span>Code</span> <span></span>by<span></span>
+          <span className="up">Design</span> &{" "}
+          <span className="down">Code</span> <span></span>by<span></span>
           <span>
-            <MouseInteractionWrapper>
-              <Logo className="footer-logo" />
-            </MouseInteractionWrapper>
+            <Logo className="footer-logo" />
           </span>
         </p>
       </div>
