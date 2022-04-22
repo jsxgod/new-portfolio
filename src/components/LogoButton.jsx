@@ -1,5 +1,6 @@
 import React from "react";
 import { ReactComponent as Logo } from "../assets/svg/logo_outline.svg";
+import { MouseInteractionWrapper } from "../components";
 import { motion } from "framer-motion";
 
 const variants = {
@@ -34,16 +35,9 @@ const LogoButton = ({ onClickHandler }) => {
       exit="hide"
     >
       <div className="logo-wrapper">
-        <Logo
-          className="logo"
-          onMouseEnter={() =>
-            document.querySelector(".custom-cursor").classList.add("big")
-          }
-          onMouseLeave={() =>
-            document.querySelector(".custom-cursor").classList.remove("big")
-          }
-          onClick={() => onClickHandler()}
-        />
+        <MouseInteractionWrapper>
+          <Logo className="logo" onClick={() => onClickHandler()} />
+        </MouseInteractionWrapper>
       </div>
     </motion.div>
   );

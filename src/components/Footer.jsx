@@ -49,12 +49,12 @@ const Footer = ({ sideLinksLocation, changeLocation }) => {
             variants={staggerVariants}
           >
             <motion.span className="footer-link" variants={linksVariants}>
-              <MouseInteractionWrapper size="medium">
+              <MouseInteractionWrapper addClass="medium">
                 <FaLinkedin />
               </MouseInteractionWrapper>
             </motion.span>
             <motion.span className="footer-link" variants={linksVariants}>
-              <MouseInteractionWrapper size="medium">
+              <MouseInteractionWrapper addClass="medium">
                 <FaGithub />
               </MouseInteractionWrapper>
             </motion.span>

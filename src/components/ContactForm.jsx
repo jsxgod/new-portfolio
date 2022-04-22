@@ -1,6 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { CustomLabel, DrawingCanvas, FadeInOutWrapper } from "../components";
+import {
+  CustomLabel,
+  DrawingCanvas,
+  FadeInOutWrapper,
+  MouseInteractionWrapper,
+} from "../components";
 import * as htmlToImage from "html-to-image";
 import Toolbox from "./Toolbox";
 
@@ -103,60 +108,34 @@ const ContactForm = ({ selectedColor, handleChangeColor }) => {
             selectedSide === "left" ? "active" : ""
           }`}
         >
-          <span
-            onMouseEnter={() => {
-              document.querySelector(".custom-cursor").classList.add("medium");
-            }}
-            onMouseLeave={() => {
-              document
-                .querySelector(".custom-cursor")
-                .classList.remove("medium");
-            }}
-            onMouseDown={() => {
-              document
-                .querySelector(".custom-cursor")
-                .classList.remove("medium");
-            }}
-            onClick={() => setSelectedSide("left")}
-          >
-            standard
-            {selectedSide === "left" && (
-              <motion.div
-                className="underline"
-                layoutId="underline"
-              ></motion.div>
-            )}
-          </span>
+          <MouseInteractionWrapper addClass="medium">
+            <span onClick={() => setSelectedSide("left")}>
+              standard
+              {selectedSide === "left" && (
+                <motion.div
+                  className="underline"
+                  layoutId="underline"
+                ></motion.div>
+              )}
+            </span>
+          </MouseInteractionWrapper>
         </div>
         <div
           className={`selection-wrapper ${
             selectedSide === "right" ? "active" : ""
           }`}
         >
-          <span
-            onMouseEnter={() => {
-              document.querySelector(".custom-cursor").classList.add("medium");
-            }}
-            onMouseLeave={() => {
-              document
-                .querySelector(".custom-cursor")
-                .classList.remove("medium");
-            }}
-            onMouseDown={() => {
-              document
-                .querySelector(".custom-cursor")
-                .classList.remove("medium");
-            }}
-            onClick={() => setSelectedSide("right")}
-          >
-            paper
-            {selectedSide === "right" && (
-              <motion.div
-                className="underline"
-                layoutId="underline"
-              ></motion.div>
-            )}
-          </span>
+          <MouseInteractionWrapper addClass="medium">
+            <span onClick={() => setSelectedSide("right")}>
+              paper
+              {selectedSide === "right" && (
+                <motion.div
+                  className="underline"
+                  layoutId="underline"
+                ></motion.div>
+              )}
+            </span>
+          </MouseInteractionWrapper>
         </div>
         <form
           id="contact-form"
@@ -232,51 +211,22 @@ const ContactForm = ({ selectedColor, handleChangeColor }) => {
         </div>
         {selectedSide === "left" ? (
           <div className="send-wrapper">
-            <input
-              className="send-button"
-              type="submit"
-              value="send"
-              form="contact-form"
-              onMouseEnter={() => {
-                document
-                  .querySelector(".custom-cursor")
-                  .classList.add("medium");
-              }}
-              onMouseLeave={() => {
-                document
-                  .querySelector(".custom-cursor")
-                  .classList.remove("medium");
-              }}
-              onMouseDown={() => {
-                document
-                  .querySelector(".custom-cursor")
-                  .classList.remove("medium");
-              }}
-            />
+            <MouseInteractionWrapper addClass="medium">
+              <input
+                className="send-button"
+                type="submit"
+                value="send"
+                form="contact-form"
+              />
+            </MouseInteractionWrapper>
           </div>
         ) : (
           <div className="send-wrapper">
-            <button
-              className="send-button"
-              onMouseEnter={() => {
-                document
-                  .querySelector(".custom-cursor")
-                  .classList.add("medium");
-              }}
-              onMouseLeave={() => {
-                document
-                  .querySelector(".custom-cursor")
-                  .classList.remove("medium");
-              }}
-              onMouseDown={() => {
-                document
-                  .querySelector(".custom-cursor")
-                  .classList.remove("medium");
-              }}
-              onClick={() => handleSaveImage()}
-            >
-              save
-            </button>
+            <MouseInteractionWrapper addClass="medium">
+              <button className="send-button" onClick={() => handleSaveImage()}>
+                save
+              </button>
+            </MouseInteractionWrapper>
           </div>
         )}
       </div>

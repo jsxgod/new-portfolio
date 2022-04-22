@@ -149,12 +149,12 @@ const Navbar = ({ sideLinksLocation }) => {
                 variants={linksWrapperVariants}
               >
                 <motion.span className="side-link" variants={linksVariants}>
-                  <MouseInteractionWrapper size="medium">
+                  <MouseInteractionWrapper addClass="medium">
                     <FaGithub />
                   </MouseInteractionWrapper>
                 </motion.span>
                 <motion.span className="side-link" variants={linksVariants}>
-                  <MouseInteractionWrapper size="medium">
+                  <MouseInteractionWrapper addClass="medium">
                     <FaLinkedin />
                   </MouseInteractionWrapper>
                 </motion.span>
@@ -174,15 +174,9 @@ const Navbar = ({ sideLinksLocation }) => {
           exit="exit"
           className="logo-wrapper"
         >
-          <Logo
-            className="logo-small"
-            onMouseEnter={() =>
-              document.querySelector(".custom-cursor").classList.add("big")
-            }
-            onMouseLeave={() =>
-              document.querySelector(".custom-cursor").classList.remove("big")
-            }
-          />
+          <MouseInteractionWrapper>
+            <Logo className="logo-small" />
+          </MouseInteractionWrapper>
         </motion.div>
         <motion.ul
           variants={staggerVariants}
@@ -196,14 +190,8 @@ const Navbar = ({ sideLinksLocation }) => {
               key={link}
               variants={fadeInOutVariants}
               className="navbar-link"
-              onMouseEnter={() =>
-                document.querySelector(".custom-cursor").classList.add("big")
-              }
-              onMouseLeave={() =>
-                document.querySelector(".custom-cursor").classList.remove("big")
-              }
             >
-              {link}
+              <MouseInteractionWrapper>{link}</MouseInteractionWrapper>
             </motion.li>
           ))}
         </motion.ul>
