@@ -54,7 +54,7 @@ const About = () => {
   };
 
   return (
-    <div className="section">
+    <div className="section" id="about-section">
       <div className="about-me-wrapper">
         <div className="info-wrapper text">
           <div className="text-wrapper">

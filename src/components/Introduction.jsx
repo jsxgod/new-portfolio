@@ -38,7 +38,7 @@ const Introduction = () => {
   }, []);
 
   return (
-    <div className="section">
+    <div className="section" id="introduction-section">
       {showContent && (
         <>
           <motion.div

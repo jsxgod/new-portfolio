@@ -129,7 +129,7 @@ const Projects = () => {
   };
 
   return (
-    <div className="section">
+    <div className="section" id="projects-section">
       <div className="projects-wrapper">
         <div className="header-wrapper">
           <FadeInOutWrapper once={false}>

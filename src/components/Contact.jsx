@@ -20,6 +20,7 @@ const Contact = () => {
   return (
     <motion.div
       className="section"
+      id={"contact-section"}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 2 }}
