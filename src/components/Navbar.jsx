@@ -98,6 +98,11 @@ const Navbar = ({ sideLinksLocation }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [oldScrollPosition]);
 
+  const handleScrollToSection = (sectionName) => {
+    const section = document.getElementById(`${sectionName}-section`);
+    section?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <>
       {hide && (
@@ -175,7 +180,10 @@ const Navbar = ({ sideLinksLocation }) => {
           className="logo-wrapper"
         >
           <MouseInteractionWrapper>
-            <Logo className="logo-small" />
+            <Logo
+              className="logo-small"
+              onClick={() => handleScrollToSection("introduction")}
+            />
           </MouseInteractionWrapper>
         </motion.div>
         <motion.ul
@@ -190,6 +198,7 @@ const Navbar = ({ sideLinksLocation }) => {
               key={link}
               variants={fadeInOutVariants}
               className="navbar-link"
+              onClick={() => handleScrollToSection(link)}
             >
               <MouseInteractionWrapper>{link}</MouseInteractionWrapper>
             </motion.li>
