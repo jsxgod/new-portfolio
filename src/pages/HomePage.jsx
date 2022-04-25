@@ -13,6 +13,7 @@ const HomePage = () => {
   const [navbarAnimationCompleted, setNavbarAnimationCompleted] =
     useState(false);
   useEffect(() => {
+    document.querySelector(".custom-cursor").classList.remove("big");
     setTimeout(() => {
       setNavbarAnimationCompleted(true);
     }, 600);
