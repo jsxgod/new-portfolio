@@ -31,11 +31,6 @@ const LogoButton = ({ onClickHandler }) => {
   }, []);
 
   return (
-    /*
-    <motion.div
-
-      className="logo-animation"
-    >*/
     <motion.div
       className="section"
       style={{ paddingTop: 0, marginBottom: 0 }}
