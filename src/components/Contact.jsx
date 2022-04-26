@@ -2,7 +2,7 @@ import React, { Suspense, useState } from "react";
 import PlaneFlight from "../assets/3D/PlaneFlight";
 import { AnimatePresence, motion } from "framer-motion";
 import { LayoutCamera, MotionCanvas } from "framer-motion-3d";
-import { FadeInOutWrapper, ContactForm, Toolbox } from "../components";
+import { FadeInOutWrapper, ContactForm } from "../components";
 
 const Contact = () => {
   const [playAnimation, setPlayAnimation] = useState(false);
@@ -11,10 +11,6 @@ const Contact = () => {
 
   const handleHideAnimation = () => {
     setShowAnimation(false);
-  };
-
-  const handleChangeColor = (color) => {
-    setSelectedColor(color);
   };
 
   return (
