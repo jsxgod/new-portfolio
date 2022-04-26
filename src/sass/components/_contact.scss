@@ -17,9 +17,15 @@
   }
 }
 
+.contact-info-wrapper {
+  grid-column: 1 / 5;
+  display: flex;
+  flex-direction: column;
+}
+
 .contact-form-container {
   position: relative;
-  grid-column: 5 / 11;
+  grid-column: 6 / 12;
   width: 100%;
   height: 90%;
   padding: 0 4rem;
@@ -31,6 +37,12 @@
     "selection-left selection-left selection-right selection-right"
     "form form form form"
     "send send . .";
+  transition: filter 1s ease-in-out;
+  filter: blur(0px);
+  &.blurred {
+    filter: blur(2px);
+    pointer-events: none;
+  }
   &.noise {
     &::before {
       content: "";
@@ -293,6 +305,9 @@
     align-items: center;
     grid-area: send;
     transform: translateY(100%);
+    &.right {
+      grid-column: 3 / 5;
+    }
     .send-button {
       background-color: inherit;
       border: none;
@@ -311,10 +326,79 @@
       }
     }
   }
+  .blur-wall {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    backdrop-filter: brightness(0.8) blur(2px);
+    pointer-events: none;
+  }
+  .loading-bar-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    z-index: 101;
+    display: flex;
+    overflow: hidden;
+    span {
+      height: 4px;
+      transform: translate(-100%);
+      background-color: $secondaryColor;
+      animation: loading-animation 1.5s infinite linear;
+    }
+    @keyframes loading-animation {
+      0% {
+        opacity: 0;
+        width: 0%;
+      }
+      25% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+        width: 100%;
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(200%);
+      }
+    }
+  }
+  .email-sent-note-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 102;
+    background-color: $defaultColor;
+    display: flex;
+    align-items: flex-start;
+    .text-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      height: 75%;
+      .header-text-wrapper {
+        overflow: hidden;
+        h2 {
+        }
+        h3 {
+        }
+      }
+    }
+  }
 }
 
 .toolbox-wrapper {
-  grid-column: 11 / 13;
+  grid-column: 12 / 13;
   width: 100%;
   height: 100%;
   display: flex;
@@ -330,7 +414,7 @@
     overflow: visible;
     svg {
       position: absolute;
-      left: 50%;
+      left: 125%;
       width: 100%;
       height: 100%;
       transform: rotate(45deg) scale(2);
