@@ -18,8 +18,8 @@ const Toolbox = ({ selectedColor, handleChangeColor }) => {
         <motion.div
           className={`pen-wrapper ${selectedColor === color ? "active" : ""}`}
           key={color}
-          animate={selectedColor === color ? { marginRight: 100 } : {}}
-          whileHover={selectedColor === color ? {} : { marginRight: 50 }}
+          animate={selectedColor === color ? { marginRight: 60 } : {}}
+          whileHover={selectedColor === color ? {} : { marginRight: 25 }}
           onClick={() => {
             handleChangeColor(color);
           }}
