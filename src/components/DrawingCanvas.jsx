@@ -1,10 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-const DrawingCanvas = ({ color = "black", initial }) => {
+const DrawingCanvas = ({
+  color = "black",
+  initial,
+  canvasRef,
+  canvasContextRef,
+}) => {
   const [isDrawing, setIsDrawing] = useState(false);
-  const canvasRef = useRef(null);
-  const canvasContextRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -16,11 +19,19 @@ const DrawingCanvas = ({ color = "black", initial }) => {
     canvasContext.lineCap = "round";
     canvasContext.lineWidth = 5;
 
-    if (initial !== null) {
-      canvasContext.drawImage(initial, 0, 0);
-    }
     canvasContextRef.current = canvasContext;
   }, []);
+
+  useEffect(() => {
+    if (initial !== null) {
+      canvasContextRef.current.clearRect(
+        0,
+        0,
+        canvasRef.width,
+        canvasRef.height
+      );
+    }
+  }, [initial]);
 
   useEffect(() => {
     canvasContextRef.current.strokeStyle = color;
