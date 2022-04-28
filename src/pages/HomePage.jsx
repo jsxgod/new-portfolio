@@ -30,7 +30,7 @@ const HomePage = () => {
       <Navbar sideLinksLocation={sideLinksLocation} />
       {navbarAnimationCompleted && (
         <>
-          <Introduction />
+          <Introduction showContent={navbarAnimationCompleted} />
           <About />
           <Projects />
           <Contact />

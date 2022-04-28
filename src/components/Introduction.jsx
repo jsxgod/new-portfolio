@@ -19,9 +19,7 @@ const fadeUpVariants = {
   },
 };
 
-const Introduction = () => {
-  const [showContent, setShowContent] = useState(false);
-
+const Introduction = ({ showContent }) => {
   const copyEmailInfo = () => {
     navigator.clipboard.writeText("kacpersmyczyk@gmail.com");
     document.querySelector(".custom-cursor").classList.add("copied");
@@ -30,12 +28,6 @@ const Introduction = () => {
       document.querySelector(".custom-cursor").classList.remove("copied");
     }, 500);
   };
-
-  useEffect(() => {
-    setTimeout(() => {
-      setShowContent(true);
-    }, 600);
-  }, []);
 
   return (
     <div className="section" id="introduction-section">
