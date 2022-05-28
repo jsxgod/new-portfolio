@@ -5,24 +5,37 @@
   display: flex;
   flex-direction: column;
   position: relative;
-    .text-wrapper {
-      font-family: "PlusJakartaText Regular";
-      margin-bottom: 2rem;
-      display: flex;
-      flex-direction: column;
-      .text-row {
-        min-width: fit-content;
-        line-height: 1.2;
-        white-space: nowrap;
-        span {
-          position: relative;
-          font-family: "Monument Regular";
-        }
+  .text-wrapper {
+    font-family: "PlusJakartaText Regular";
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    .text-row {
+      min-width: fit-content;
+      line-height: 1.2;
+      white-space: nowrap;
+      span {
+        position: relative;
+        font-family: "Monument Regular";
       }
     }
-    .email-wrapper {
-      width: fit-content;
-      padding: 0 1rem 1rem 0;
-      font-family: "PlusJakartaText Light";
-    }
+  }
+  .email-wrapper {
+    width: fit-content;
+    padding: 0 1rem 1rem 0;
+    font-family: "PlusJakartaText Light";
+  }
+}
+
+.scene-wrapper {
+  overflow: visible;
+  position: absolute;
+  top: 0;
+  left: 0;
+  grid-column: 1 / 13;
+  width: calc(100% + 2rem);
+  height: 100%;
+  canvas {
+    opacity: 0.6;
+  }
 }
