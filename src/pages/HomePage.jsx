@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import {
   About,
   Navbar,
@@ -7,6 +8,7 @@ import {
   Contact,
   Footer,
 } from "../components";
+import Scene from "../components/3D/Scene";
 
 const HomePage = () => {
   // change variable name
@@ -18,6 +20,7 @@ const HomePage = () => {
       setNavbarAnimationCompleted(true);
     }, 600);
   }, []);
+  const [loadCanvas, setLoadCanvas] = useState(false);
 
   const [sideLinksLocation, setSideLinksLocation] = useState("sidebar");
 
@@ -25,9 +28,28 @@ const HomePage = () => {
     setSideLinksLocation(location);
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoadCanvas(true);
+    }, 1200);
+  }, []);
+
   return (
     <div className="home-page">
       <Navbar sideLinksLocation={sideLinksLocation} />
+      {loadCanvas && (
+        <motion.div
+          className="scene-wrapper"
+          initial={{ opacity: 0 }}
+          animate={
+            loadCanvas
+              ? { opacity: 1, transition: { delay: 0.3, duration: 1 } }
+              : {}
+          }
+        >
+          <Scene />
+        </motion.div>
+      )}
       {navbarAnimationCompleted && (
         <>
           <Introduction showContent={navbarAnimationCompleted} />
