@@ -39,9 +39,9 @@ const ContactForm = ({ selectedColor, handleChangeColor, handleEmailSent }) => {
       attachment: canvasBlobRef.current !== null ? canvasBlobRef.current : "",
     };
     axios
-      .post("http://localhost:5000/api/email", formData, {
+      .post("https://emailserver-ksdev.herokuapp.com/api/email", formData, {
         headers: { "content-type": "application/json" },
-        timeout: 5000,
+        timeout: 30000,
       })
       .then((res) => {
         console.log(res.status);
