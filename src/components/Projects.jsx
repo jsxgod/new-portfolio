@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-
 import { projectsData } from "../data/projectsData";
-
 import FadeInOutWrapper from "./FadeInOutWrapper";
+import { AiFillCloseCircle } from "react-icons/ai";
 
 const textLeftVariants = {
   rest: {
@@ -58,6 +57,24 @@ const fadeUpVariants = {
   },
 };
 
+const fadeUpAndScaleVariants = {
+  hide: {
+    opacity: 0,
+    scale: 0,
+    y: 50,
+  },
+  show: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.6, 0.05, -0.01, 0.99], delay: 2 },
+  },
+  exit: {
+    opacity: 0,
+    transition: { duration: 0.3, ease: [0.6, 0.05, -0.01, 0.99] },
+  },
+};
+
 const fadeInVariants = {
   hide: {
     opacity: 0,
@@ -98,12 +115,6 @@ const Projects = () => {
       directionY > 0
         ? ((middleY - e.clientY) / (middleY - rect.y)) * 10 * directionY
         : ((e.clientY - middleY) / (middleY - rect.y)) * 10 * directionY;
-    //console.log("X: " + xOffset + "%  Y: " + yOffset + "%");
-    const style = window.getComputedStyle(thumbnail);
-    const matrix = style.transform;
-    const matrixValues = matrix.match(/matrix.*\((.+)\)/)[1].split(", ");
-    const trX = matrixValues[4];
-    const trY = matrixValues[5];
 
     if (directionX > 0) {
       thumbnail.style.marginLeft = `${xOffset}px`;
@@ -115,24 +126,13 @@ const Projects = () => {
     } else {
       thumbnail.style.marginBottom = `${yOffset}px`;
     }
-    /*
-    const newX =
-      parseInt(trX) === 0
-        ? xOffset.toPrecision(1)
-        : parseInt(trX) + (parseInt(trX) * xOffset.toPrecision(1)) / 100;
-    const newY =
-      parseInt(trY) === 0
-        ? yOffset.toPrecision(1)
-        : parseInt(trY) + (parseInt(trY) * yOffset.toPrecision(1)) / 100;
-    console.log("new x: " + newX + " new y: " + newY);
-    thumbnail.style.transform = `translate(${newX}px,${newY}px)`;*/
   };
 
   return (
     <div className="section" id="projects-section">
       <div className="projects-wrapper">
         <div className="header-wrapper">
-          <FadeInOutWrapper once={false}>
+          <FadeInOutWrapper once={showDetails}>
             <h2>Projects</h2>
           </FadeInOutWrapper>
         </div>
@@ -142,22 +142,28 @@ const Projects = () => {
             initial="hide"
             animate="show"
             exit="exit"
-            onMouseEnter={() => {
-              document.querySelector(".custom-cursor").classList.add("medium");
-            }}
-            onMouseLeave={() => {
-              document
-                .querySelector(".custom-cursor")
-                .classList.remove("medium");
-            }}
-            onClick={() => {
-              document
-                .querySelector(".custom-cursor")
-                .classList.remove("medium");
-              setShowDetails(false);
-            }}
           >
-            <motion.span variants={fadeUpVariants}>X</motion.span>
+            <motion.span
+              variants={fadeUpAndScaleVariants}
+              onMouseEnter={() => {
+                document
+                  .querySelector(".custom-cursor")
+                  .classList.add("medium");
+              }}
+              onMouseLeave={() => {
+                document
+                  .querySelector(".custom-cursor")
+                  .classList.remove("medium");
+              }}
+              onClick={() => {
+                document
+                  .querySelector(".custom-cursor")
+                  .classList.remove("medium");
+                setShowDetails(false);
+              }}
+            >
+              <AiFillCloseCircle />
+            </motion.span>
           </motion.div>
         )}
         <AnimatePresence exitBeforeEnter>
@@ -170,7 +176,7 @@ const Projects = () => {
                   className={`project-wrapper ${i} ${
                     i % 2 === 0 ? "left" : "right"
                   }`}
-                  onMouseEnter={(e) => {
+                  onMouseEnter={() => {
                     document
                       .querySelector(".custom-cursor")
                       .classList.add("big");
@@ -187,10 +193,19 @@ const Projects = () => {
                     handleMoveThumbnailWithCursor(e, element);
                   }}
                   onClick={() => {
+                    setSelectedProject(i);
+                    document
+                      .querySelectorAll(".project-wrapper")
+                      .forEach((wrapper) => {
+                        wrapper.classList.add("no-pointer-events");
+                      });
+                    const selectedElement = document.getElementById(
+                      `project-name-${i}`
+                    );
+                    selectedElement.classList.remove("no-pointer-events");
                     document
                       .querySelector(".custom-cursor")
                       .classList.remove("big");
-                    setSelectedProject(i);
                     setShowDetails(true);
                   }}
                   initial="rest"
@@ -222,7 +237,7 @@ const Projects = () => {
                   >
                     {
                       <FadeInOutWrapper once={false}>
-                        project.name
+                        {project.name}
                       </FadeInOutWrapper>
                     }
                   </motion.h2>
@@ -243,61 +258,34 @@ const Projects = () => {
               >
                 {projectsData[selectedProject].name}
               </motion.h2>
-              {/*
-              <motion.div
-                className="project-type-wrapper"
-                variants={fadeUpVariants}
-              >
-                <span className="info">front-end</span>
-              </motion.div>
-              {[0, 1, 2, 3, 4, 5, 6].map((info, i) => (
-                <motion.div
-                  className="info-bean"
-                  style={{ gridArea: `info-${i + 1}` }}
-                  variants={fadeUpVariants}
-                >
-                  <span className="info">{`info-${i}`}</span>
-                </motion.div>
-              ))}*/}
               <motion.div
                 className="carousel-wrapper"
                 variants={fadeInVariants}
               >
                 <div className="carousel left play">
-                  <span>front-end</span>
-                  <span>design</span>
-                  <span>framer-motion</span>
-                  <span>sass</span>
-                  <span>javascript</span>
-                  <span>react</span>
-                  <span>blender</span>
-                  <span>three.js</span>
+                  {projectsData[selectedProject].stack.map((technology) => (
+                    <span>{technology}</span>
+                  ))}
                 </div>
                 <motion.div className="carousel play" variants={fadeUpVariants}>
-                  <span>front-end</span>
-                  <span>design</span>
-                  <span>framer-motion</span>
-                  <span>sass</span>
-                  <span>javascript</span>
-                  <span>react</span>
-                  <span>blender</span>
-                  <span>three.js</span>
+                  {projectsData[selectedProject].stack.map((technology) => (
+                    <span>{technology}</span>
+                  ))}
+                </motion.div>
+                <motion.div
+                  className="carousel right play"
+                  variants={fadeUpVariants}
+                >
+                  {projectsData[selectedProject].stack.map((technology) => (
+                    <span>{technology}</span>
+                  ))}
                 </motion.div>
               </motion.div>
               <motion.div
                 className="description-wrapper"
                 variants={fadeUpVariants}
               >
-                <p>Project description here qweqe qwewqedwqkd</p>
-                <p>
-                  qwdjqwpdqwjpdqwpdojqw
-                  dojwqodjqwojqweqweqwjdojqwdoqwdjoqwdjqwodjqwodjqwodjqwjqwodjqw
-                  qweojqwoejwqoejwqoejwqoejqowjeoqjeoqwjeoqwje
-                </p>
-                <p>
-                  Project description here
-                  qweqeqweojqwoejwqoejwqoejwqoejqowjeoqjeoqwjeoqwje wqe
-                </p>
+                {projectsData[selectedProject].description}
               </motion.div>
               <motion.div
                 className="gallery-wrapper"
@@ -307,7 +295,7 @@ const Projects = () => {
                 }}
               >
                 <motion.img
-                  src="https://gainbitcoin.com/wp-content/uploads/2020/04/Automatic-Fortunes-Investing-in-the-Number-One-Tech-Stock-696x449.jpg"
+                  src={projectsData[selectedProject].thumbnail}
                   alt="preview"
                   transition={{ duration: 0.6, ease: [0.6, 0.05, -0.01, 0.99] }}
                   layoutId={`project-${selectedProject}-preview-image`}
@@ -327,7 +315,13 @@ const Projects = () => {
                     .classList.remove("medium");
                 }}
               >
-                <a href="/">LIVE</a>
+                <a
+                  href={projectsData[selectedProject].live}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  LIVE
+                </a>
               </motion.div>
               <motion.div
                 className="info-bean bottom-link repo"
@@ -343,7 +337,13 @@ const Projects = () => {
                     .classList.remove("medium");
                 }}
               >
-                <a href="/">REPO</a>
+                <a
+                  href={projectsData[selectedProject].repo}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  REPO
+                </a>
               </motion.div>
             </motion.div>
           )}
