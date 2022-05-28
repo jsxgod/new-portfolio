@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { ScrollExploreInfo } from "../components";
+import Scene from "../components/3D/Scene";
 
 const fadeUpVariants = {
   hide: {
@@ -30,7 +31,11 @@ const Introduction = ({ showContent }) => {
   };
 
   return (
-    <div className="section" id="introduction-section">
+    <div
+      className="section"
+      id="introduction-section"
+      style={{ overflow: "visible" }}
+    >
       {showContent && (
         <>
           <motion.div
