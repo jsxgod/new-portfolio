@@ -50,12 +50,12 @@ const Contact = () => {
               <FadeInOutWrapper gentle>
                 <p>
                   Do you have a job offer for me? Do you want to build a website
-                  together? Simply want to get in touch? Whatever it is You are
+                  together? Simply want to get in touch? Whatever it is you are
                   reaching out to me I will make sure to respond as quickly as
                   possible.
                 </p>
                 <p>
-                  Feel free to draw a note or a doodle You would like to attach
+                  Feel free to draw a note or a doodle you would like to attach
                   by using the paper tab next to the form tab. Make sure to save
                   it before sending.
                 </p>
