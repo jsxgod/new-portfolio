@@ -169,7 +169,9 @@ const Navbar = ({ sideLinksLocation }) => {
         </>
       )}
       <nav
-        className={`navbar-wrapper block-reveal up ${hide ? "hide" : ""}`}
+        className={`navbar-wrapper block-reveal up ${hide ? "hide" : ""} ${
+          window.scrollY >= 200 && "glassmorphism"
+        }`}
         onAnimationEnd={() => setShowChildren(true)}
       >
         <motion.div
