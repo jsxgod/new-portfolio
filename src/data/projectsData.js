@@ -24,8 +24,8 @@ export const projectsData = [
         </p>
       </>
     ),
-    live: "",
-    repo: "",
+    live: "https://germanwhist-ksdev.herokuapp.com/",
+    repo: "https://github.com/jsxgod/card-game",
     stack: [
       "Next.js",
       "TypeScript",
@@ -61,8 +61,7 @@ export const projectsData = [
         </p>
       </>
     ),
-    live: "",
-    repo: "",
+    repo: "https://github.com/jsxgod/new-portfolio",
     stack: [
       "React",
       "sass",
@@ -95,10 +94,15 @@ export const projectsData = [
           established visual boundaries of the page. Redux-toolkit was used to
           manage the cart state.
         </p>
+        <p>
+          Visit the live site on your mobile device or use the dev tools to
+          target a mobile view in a browser of your choice.
+          <p>http://skateshop-ksdev.vercel.app/</p>
+        </p>
       </>
     ),
-    live: "",
-    repo: "",
+    live: "http://skateshop-ksdev.vercel.app/",
+    repo: "https://github.com/jsxgod/skate-shop",
     stack: [
       "React",
       "Redux-toolkit",
@@ -126,8 +130,8 @@ export const projectsData = [
         </p>
       </>
     ),
-    live: "",
-    repo: "",
+    live: "https://startpage-ksdev.netlify.app",
+    repo: "https://github.com/jsxgod/startpage",
     stack: ["React", "local storage", "sass", "framer-motion"],
   },
   {
@@ -150,7 +154,7 @@ export const projectsData = [
         </p>
       </>
     ),
-    live: "https://webchat-jsxgod.netlify.app/",
+    live: "https://webchat-ksdev.netlify.app",
     repo: "https://github.com/jsxgod/web-chat",
     stack: ["React", "css", "Socket.io", "node", "express"],
   },
@@ -171,8 +175,8 @@ export const projectsData = [
         </p>
       </>
     ),
-    live: "",
-    repo: "",
+    live: "https://modelagency-ksdev.netlify.app",
+    repo: "https://github.com/jsxgod/model-agency",
     stack: ["React", "sass", "framer-motion"],
   },
 ];
