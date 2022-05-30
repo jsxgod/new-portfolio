@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { ScrollExploreInfo } from "../components";
 import Scene from "../components/3D/Scene";
+import useWindowDimensions from "../hooks/useWindowDimensions";
 
 const fadeUpVariants = {
   hide: {
@@ -21,6 +22,8 @@ const fadeUpVariants = {
 };
 
 const Introduction = ({ showContent }) => {
+  const dimensions = useWindowDimensions();
+
   const copyEmailInfo = () => {
     navigator.clipboard.writeText("kacpersmyczyk@gmail.com");
     document.querySelector(".custom-cursor").classList.add("copied");
@@ -47,22 +50,48 @@ const Introduction = ({ showContent }) => {
             className="introduction-wrapper"
           >
             <motion.div variants={fadeUpVariants} className="text-wrapper">
-              <div className="text-row">
-                <h1>Hi, I'm</h1>
-              </div>
-              <div className="text-row">
-                <h1>
-                  <span>Kacper</span>, a software engineer
-                </h1>
-              </div>
-              <div className="text-row">
-                <h1>who likes good design,</h1>
-              </div>
-              <div className="text-row">
-                <h1>
-                  coding stuff for the <span>web</span>.
-                </h1>
-              </div>
+              {dimensions.width > 768 ? (
+                <>
+                  <div className="text-row">
+                    <h1>Hi, I'm</h1>
+                  </div>
+                  <div className="text-row">
+                    <h1>
+                      <span>Kacper</span>, a software engineer
+                    </h1>
+                  </div>
+                  <div className="text-row">
+                    <h1>who likes good design,</h1>
+                  </div>
+                  <div className="text-row">
+                    <h1>
+                      coding stuff for the <span>web</span>.
+                    </h1>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="text-row">
+                    <h1>Hi, I'm</h1>
+                    <div className="text-row">
+                      <h1>
+                        <span>Kacper</span>,
+                      </h1>
+                    </div>
+                  </div>
+                  <div className="text-row">
+                    <h1>a software engineer</h1>
+                  </div>
+                  <div className="text-row">
+                    <h1>who likes good design,</h1>
+                  </div>
+                  <div className="text-row">
+                    <h1>
+                      coding stuff for the <span>web</span>.
+                    </h1>
+                  </div>
+                </>
+              )}
             </motion.div>
             <motion.div
               variants={fadeUpVariants}
@@ -79,10 +108,6 @@ const Introduction = ({ showContent }) => {
             >
               <h5>kacpersmyczyk@gmail.com</h5>
             </motion.div>
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            <ScrollExploreInfo />
           </motion.div>
         </>
       )}

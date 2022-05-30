@@ -4,10 +4,12 @@ import { LogoButton } from "./components";
 import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
 
 import "./sass/main.scss";
+import useWindowDimensions from "./hooks/useWindowDimensions";
 
 const App = () => {
   const [showSite, setShowSite] = useState(false);
   const customCursor = useRef(null);
+  const dimensions = useWindowDimensions();
 
   const moveCursor = (event) => {
     try {
@@ -24,9 +26,14 @@ const App = () => {
   };
 
   return (
-    <div className="App" onMouseMove={(event) => moveCursor(event)}>
+    <div
+      className="App"
+      onMouseMove={dimensions.width > 992 ? (event) => moveCursor(event) : null}
+    >
       <motion.div
-        className="custom-cursor enabled"
+        className={`custom-cursor ${
+          dimensions.width > 768 ? "enabled" : "disabled"
+        }`}
         ref={customCursor}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

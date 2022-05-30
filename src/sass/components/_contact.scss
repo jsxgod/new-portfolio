@@ -5,174 +5,302 @@
   position: relative;
 }
 
-.contact-header-wrapper {
-  grid-column: 1 / 4;
-  height: fit-content;
-  margin-bottom: 2rem;
-  position: absolute;
-  top: 0;
-  left: 0;
-  h2 {
-    font-family: "PlusJakartaText Bold";
-  }
-}
-
-.contact-info-wrapper {
-  grid-column: 1 / 5;
-  display: flex;
-  flex-direction: column;
-}
-
-.contact-form-container {
-  position: relative;
-  grid-column: 6 / 12;
-  width: 100%;
-  height: 90%;
-  padding: 0 4rem;
+.contact-wrapper {
+  grid-column: 1 / 13;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 3rem auto 3rem;
-  column-gap: 20px;
-  grid-template-areas:
-    "selection-left selection-left selection-right selection-right"
-    "form form form form"
-    "send send . .";
-  transition: filter 1s ease-in-out;
-  filter: blur(0px);
-  &.blurred {
-    filter: blur(2px);
-    pointer-events: none;
+  grid-template-columns: repeat(12, 1fr);
+  height: 100%;
+  @media (max-width: $desktop) {
+    grid-template-rows: 1fr 1fr 1fr 1fr;
   }
-  &.noise {
-    &::before {
-      content: "";
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background-color: rgb(22, 22, 22);
-      -webkit-mask: $noise,
-        radial-gradient(circle at 30% 0, transparent 10%, $defaultColor 80%)
-          200% 0/200% 100%;
+  @media (max-width: $tablet) {
+    grid-template-rows: 0.5fr 1fr 1fr 1fr;
+  }
+  @media (max-width: $phone) {
+    grid-template-rows: 0.5fr 1fr;
+  }
+  .contact-header-wrapper {
+    grid-column: 1 / 4;
+    height: fit-content;
+    margin-bottom: 2rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    h2 {
+      font-family: "PlusJakartaText Bold";
     }
   }
-  &.paper {
-    background-color: rgb(22, 22, 22);
-  }
-  .selection-wrapper {
-    transform: translateY(-110%);
-    width: 100%;
-    height: 100%;
+
+  .contact-info-wrapper {
+    grid-column: 1 / 5;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    grid-area: selection-left;
-    font-family: "PlusJakartaText Regular";
-    font-size: 1.333rem;
-    color: #7f7f7f;
-    transition: color 0.3s ease-in-out;
-    &:nth-of-type(2) {
-      grid-area: selection-right;
+    flex-direction: column;
+    margin-bottom: 8rem;
+    @media (max-width: $desktop) {
+      grid-column: 1 / 8;
     }
-    &.active {
-      color: $secondaryColor;
+    @media (max-width: $tablet) {
+      grid-column: 1 / -3;
     }
-    span {
-      padding: 8px;
-      position: relative;
-      .underline {
-        position: absolute;
-        height: 1px;
+    @media (max-width: $phone) {
+      grid-column: 1 / -1;
+      margin-bottom: 4rem;
+    }
+  }
+
+  .contact-form-container {
+    position: relative;
+    grid-column: 6 / 12;
+    @media (max-width: $desktop) {
+      grid-column: 1 / 11;
+      grid-row: 2 / 5;
+    }
+    @media (max-width: $tablet) {
+      grid-column: 1 / -1;
+      grid-row: 2 / -1;
+    }
+    width: 100%;
+    height: 90%;
+    padding: 0 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 3rem auto 3rem;
+    column-gap: 20px;
+    grid-template-areas:
+      "selection-left selection-left selection-right selection-right"
+      "form form form form"
+      "send send . .";
+    transition: filter 1s ease-in-out;
+    filter: blur(0px);
+    &.blurred {
+      filter: blur(2px);
+      pointer-events: none;
+    }
+    &.noise {
+      &::before {
+        content: "";
         width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
         left: 0;
-        bottom: 0;
-        background-color: $secondaryColor;
+        background-color: rgb(22, 22, 22);
+        -webkit-mask: $noise,
+          radial-gradient(circle at 30% 0, transparent 10%, $defaultColor 80%)
+            200% 0/200% 100%;
       }
     }
-  }
-  .form-wrapper {
-    z-index: 1;
-    grid-area: form;
-    width: 100%;
-    height: 100%;
-    padding: 1.333rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 50px 50px 50px auto;
-    column-gap: 20px;
-    row-gap: 32px;
-    background: rgba(grey, 0.05);
-    box-shadow: 0 0 4px 4px rgba(grey, 0.02);
-    .input-wrapper {
+    &.paper {
+      background-color: rgb(22, 22, 22);
+    }
+    .selection-wrapper {
+      transform: translateY(-110%);
       width: 100%;
       height: 100%;
       display: flex;
-      flex-direction: column;
-      row-gap: 4px;
-      position: relative;
-      .border {
-        position: absolute;
-        bottom: 4px;
-        left: 50%;
-        width: 10px;
-        height: 1px;
-        background-color: rgba($secondaryColor, 0);
-        transition: 0.3s;
+      justify-content: center;
+      align-items: center;
+      grid-area: selection-left;
+      font-family: "PlusJakartaText Regular";
+      font-size: 1.333rem;
+      color: #7f7f7f;
+      transition: color 0.3s ease-in-out;
+      &:nth-of-type(2) {
+        grid-area: selection-right;
       }
-      &:hover {
-        cursor: none;
+      &.active {
+        color: $secondaryColor;
       }
-      &:focus-within {
-        .border {
-          left: 0;
+      span {
+        padding: 8px;
+        position: relative;
+        .underline {
+          position: absolute;
+          height: 1px;
           width: 100%;
+          left: 0;
+          bottom: 0;
           background-color: $secondaryColor;
         }
       }
-      &.name,
-      &.email,
-      &.subject {
-        grid-column: 1 / 2;
-      }
-      &.surname {
-        grid-column: 2 / 3;
-      }
-      &.message {
-        grid-column: 1 / 3;
-      }
-      .input-header {
-        font-family: "PlusJakartaText Light";
-        font-size: 0.75rem;
-      }
-      .input {
-        position: relative;
+    }
+    .form-wrapper {
+      z-index: 1;
+      grid-area: form;
+      width: 100%;
+      height: 100%;
+      padding: 1.333rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 50px 50px 50px auto;
+      column-gap: 20px;
+      row-gap: 32px;
+      background: rgba(grey, 0.05);
+      box-shadow: 0 0 4px 4px rgba(grey, 0.02);
+      .input-wrapper {
         width: 100%;
-        font-family: "PlusJakartaText Regular";
-        font-size: 1rem;
-        color: $secondaryColor;
-        border: none;
-        border-bottom: 1px solid rgba($secondaryColor, 0.3);
-        padding: 4px;
-        margin-bottom: 2rem;
-        background-color: transparent;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        row-gap: 4px;
+        position: relative;
+        .border {
+          position: absolute;
+          bottom: 4px;
+          left: 50%;
+          width: 10px;
+          height: 1px;
+          background-color: rgba($secondaryColor, 0);
+          transition: 0.3s;
+        }
         &:hover {
           cursor: none;
         }
-        &:focus {
-          outline: none;
+        &:focus-within {
+          .border {
+            left: 0;
+            width: 100%;
+            background-color: $secondaryColor;
+          }
+        }
+        &.name,
+        &.email,
+        &.subject {
+          grid-column: 1 / 2;
+        }
+        &.surname {
+          grid-column: 2 / 3;
+        }
+        &.message {
+          grid-column: 1 / 3;
+        }
+        .input-header {
+          font-family: "PlusJakartaText Light";
+          font-size: 0.75rem;
+        }
+        .input {
+          position: relative;
+          width: 100%;
+          font-family: "PlusJakartaText Regular";
+          font-size: 1rem;
+          color: $secondaryColor;
+          border: none;
+          border-bottom: 1px solid rgba($secondaryColor, 0.3);
+          padding: 4px;
+          margin-bottom: 2rem;
+          background-color: transparent;
+          &:hover {
+            cursor: none;
+          }
+          &:focus {
+            outline: none;
+          }
+        }
+        .message-input {
+          width: 100%;
+          height: 100%;
+          background-color: transparent;
+          resize: none;
+          font-family: "PlusJakartaText Light";
+          font-size: 1rem;
+          color: $secondaryColor;
+          border: 1px solid rgba($secondaryColor, 0.3);
+          padding: 4px;
+          font-size: 16px;
+          line-height: 25px;
+          letter-spacing: -0.01em;
+          transition: border-color 0.3s;
+          &:focus {
+            outline: none;
+            border-color: $secondaryColor;
+          }
+          &:hover {
+            cursor: none;
+          }
         }
       }
-      .message-input {
+      .doodle-wrapper {
+        position: relative;
+        grid-column: 2 / 4;
+        grid-row: 2 / 4;
         width: 100%;
         height: 100%;
+        display: flex;
+        align-items: center;
+        opacity: 0.8;
+        column-gap: 1rem;
+        &.red-line {
+          //red line
+          &::before {
+            content: "";
+            position: absolute;
+            left: 5%;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: rgba(255, 0, 0, 0.3);
+          }
+        }
+        img {
+          display: block;
+          height: 100%;
+          background-image: repeating-linear-gradient(
+            white 0px,
+            white 24px,
+            steelblue 25px
+          );
+        }
+        .edit-tooltip-wrapper {
+          width: calc(100% - 2rem);
+          height: 100%;
+          margin-right: calc(1rem + 4px);
+          font-family: "PlusJakartaText Regular";
+          font-size: 1.333rem;
+          color: #7f7f7f;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          span {
+            transition: color 0.15s ease-in-out;
+            &:hover {
+              color: $secondaryColor;
+            }
+          }
+        }
+      }
+    }
+    .paper-note-wrapper {
+      grid-area: form;
+      width: 100%;
+      height: 100%;
+      padding: 1.333rem;
+      position: relative;
+      background-image: repeating-linear-gradient(
+        white 0px,
+        white 24px,
+        steelblue 25px
+      );
+      //red line
+      &::before {
+        content: "";
+        position: absolute;
+        left: 10%;
+        top: 0;
+        height: 100%;
+        width: 2px;
+        background: rgba(255, 0, 0, 0.3);
+      }
+      .note-input {
+        width: 100%;
+        height: 100%;
+        max-height: 100%;
         background-color: transparent;
         resize: none;
         font-family: "PlusJakartaText Light";
         font-size: 1rem;
-        color: $secondaryColor;
-        border: 1px solid rgba($secondaryColor, 0.3);
-        padding: 4px;
+        color: $defaultColor;
+        border: none;
+        padding: 2px 10%;
         font-size: 16px;
         line-height: 25px;
         letter-spacing: -0.01em;
@@ -185,241 +313,147 @@
           cursor: none;
         }
       }
+      .save-info {
+        position: absolute;
+        left: 0;
+        top: -1.1rem;
+        font-family: "Monument Regular";
+        font-size: 0.75rem;
+        color: $secondaryColor;
+      }
+      canvas {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+      }
     }
-    .doodle-wrapper {
-      position: relative;
-      grid-column: 2 / 4;
-      grid-row: 2 / 4;
+    .send-wrapper {
       width: 100%;
       height: 100%;
       display: flex;
+      justify-content: center;
       align-items: center;
-      opacity: 0.8;
-      column-gap: 1rem;
-      &.red-line {
-        //red line
-        &::before {
-          content: "";
-          position: absolute;
-          left: 5%;
-          top: 0;
-          height: 100%;
-          width: 2px;
-          background: rgba(255, 0, 0, 0.3);
-        }
+      grid-area: send;
+      transform: translateY(100%);
+      &.right {
+        grid-column: 3 / 5;
       }
-      img {
-        display: block;
-        height: 100%;
-        background-image: repeating-linear-gradient(
-          white 0px,
-          white 24px,
-          steelblue 25px
-        );
-      }
-      .edit-tooltip-wrapper {
-        width: calc(100% - 2rem);
-        height: 100%;
-        margin-right: calc(1rem + 4px);
+      .send-button {
+        background-color: inherit;
+        border: none;
+        outline: none;
+
         font-family: "PlusJakartaText Regular";
         font-size: 1.333rem;
         color: #7f7f7f;
+        transition: color 0.3s ease-in-out;
+        &:hover,
+        &.clicked {
+          color: $secondaryColor;
+        }
+        &:hover {
+          cursor: none;
+        }
+      }
+    }
+    .blur-wall {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 100;
+      backdrop-filter: brightness(0.8) blur(2px);
+      pointer-events: none;
+    }
+    .loading-bar-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      z-index: 101;
+      display: flex;
+      overflow: hidden;
+      span {
+        height: 4px;
+        transform: translate(-100%);
+        background-color: $secondaryColor;
+        animation: loading-animation 1.5s infinite linear;
+      }
+      @keyframes loading-animation {
+        0% {
+          opacity: 0;
+          width: 0%;
+        }
+        25% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+          width: 100%;
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(200%);
+        }
+      }
+    }
+    .email-sent-note-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 102;
+      background-color: $defaultColor;
+      display: flex;
+      align-items: flex-start;
+      .text-wrapper {
         display: flex;
         justify-content: center;
         align-items: center;
-        span {
-          transition: color 0.15s ease-in-out;
-          &:hover {
-            color: $secondaryColor;
+        flex-direction: column;
+        width: 100%;
+        height: 75%;
+        .header-text-wrapper {
+          overflow: hidden;
+          h2 {
+          }
+          h3 {
           }
         }
       }
     }
   }
-  .paper-note-wrapper {
-    grid-area: form;
-    width: 100%;
-    height: 100%;
-    padding: 1.333rem;
-    position: relative;
-    background-image: repeating-linear-gradient(
-      white 0px,
-      white 24px,
-      steelblue 25px
-    );
-    //red line
-    &::before {
-      content: "";
-      position: absolute;
-      left: 10%;
-      top: 0;
-      height: 100%;
-      width: 2px;
-      background: rgba(255, 0, 0, 0.3);
+
+  .toolbox-wrapper {
+    grid-column: 12 / 13;
+    @media (max-width: $desktop) {
+      grid-row: 2 / 5;
     }
-    .note-input {
-      width: 100%;
-      height: 100%;
-      max-height: 100%;
-      background-color: transparent;
-      resize: none;
-      font-family: "PlusJakartaText Light";
-      font-size: 1rem;
-      color: $defaultColor;
-      border: none;
-      padding: 2px 10%;
-      font-size: 16px;
-      line-height: 25px;
-      letter-spacing: -0.01em;
-      transition: border-color 0.3s;
-      &:focus {
-        outline: none;
-        border-color: $secondaryColor;
-      }
-      &:hover {
-        cursor: none;
-      }
-    }
-    .save-info {
-      position: absolute;
-      left: 0;
-      top: -1.1rem;
-      font-family: "Monument Regular";
-      font-size: 0.75rem;
-      color: $secondaryColor;
-    }
-    canvas {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: transparent;
-    }
-  }
-  .send-wrapper {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
-    grid-area: send;
-    transform: translateY(100%);
-    &.right {
-      grid-column: 3 / 5;
-    }
-    .send-button {
-      background-color: inherit;
-      border: none;
-      outline: none;
-
-      font-family: "PlusJakartaText Regular";
-      font-size: 1.333rem;
-      color: #7f7f7f;
-      transition: color 0.3s ease-in-out;
-      &:hover,
-      &.clicked {
-        color: $secondaryColor;
-      }
-      &:hover {
-        cursor: none;
-      }
-    }
-  }
-  .blur-wall {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 100;
-    backdrop-filter: brightness(0.8) blur(2px);
-    pointer-events: none;
-  }
-  .loading-bar-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    z-index: 101;
-    display: flex;
-    overflow: hidden;
-    span {
-      height: 4px;
-      transform: translate(-100%);
-      background-color: $secondaryColor;
-      animation: loading-animation 1.5s infinite linear;
-    }
-    @keyframes loading-animation {
-      0% {
-        opacity: 0;
-        width: 0%;
-      }
-      25% {
-        opacity: 1;
-      }
-      50% {
-        opacity: 0.5;
+    transform: translateY(-50px);
+    .pen-wrapper {
+      width: 100%;
+      height: 12.5%;
+      position: relative;
+      overflow: visible;
+      svg {
+        position: absolute;
+        left: 120%;
         width: 100%;
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(200%);
-      }
-    }
-  }
-  .email-sent-note-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 102;
-    background-color: $defaultColor;
-    display: flex;
-    align-items: flex-start;
-    .text-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      width: 100%;
-      height: 75%;
-      .header-text-wrapper {
-        overflow: hidden;
-        h2 {
-        }
-        h3 {
-        }
-      }
-    }
-  }
-}
-
-.toolbox-wrapper {
-  grid-column: 12 / 13;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  overflow: hidden;
-  transform: translateY(-50px);
-  .pen-wrapper {
-    width: 100%;
-    height: 12.5%;
-    position: relative;
-    overflow: visible;
-    svg {
-      position: absolute;
-      left: 125%;
-      width: 100%;
-      height: 100%;
-      transform: rotate(45deg) scale(2);
-      pointer-events: none;
-      g {
+        height: 100%;
+        transform: rotate(45deg) scale(2);
+        pointer-events: none;
       }
     }
   }

@@ -10,7 +10,12 @@ import * as htmlToImage from "html-to-image";
 import Toolbox from "./Toolbox";
 import axios from "axios";
 
-const ContactForm = ({ selectedColor, handleChangeColor, handleEmailSent }) => {
+const ContactForm = ({
+  selectedColor,
+  handleChangeColor,
+  handleEmailSent,
+  dimensions,
+}) => {
   const canvasData = useRef(null);
   const [selectedSide, setSelectedSide] = useState("left");
   const [loadForEdit, setLoadForEdit] = useState(false);
@@ -369,7 +374,7 @@ const ContactForm = ({ selectedColor, handleChangeColor, handleEmailSent }) => {
           </motion.div>
         )}
       </div>
-      {selectedSide === "right" && (
+      {selectedSide === "right" && dimensions.width > 768 && (
         <Toolbox
           selectedColor={selectedColor}
           handleChangeColor={handleChangeColor}

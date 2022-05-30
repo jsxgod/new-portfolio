@@ -31,30 +31,40 @@ const LogoButton = ({ onClickHandler }) => {
   }, []);
 
   return (
-    <motion.div
-      className="section"
-      style={{ paddingTop: 0, marginBottom: 0 }}
-      variants={variants}
-      initial="hidden"
-      animate="show"
-      exit="hide"
-    >
-      <motion.div className="intro-logo-wrapper">
-        <div className="svg-wrapper">
-          <Logo
-            className="logo"
-            onMouseEnter={() => {
-              document.querySelector(".custom-cursor").classList.add("big");
-            }}
-            onMouseLeave={() => {
-              document.querySelector(".custom-cursor").classList.remove("big");
-            }}
-            onMouseDown={() => {
-              document.querySelector(".custom-cursor").classList.remove("big");
-            }}
-            onClick={() => onClickHandler()}
-          />
-        </div>
+    <motion.div className="intro-logo-wrapper">
+      <motion.div
+        initial={{ scale: 0.75, opacity: 0 }}
+        animate={{
+          scale: 1,
+          opacity: 1,
+          transition: {
+            duration: 1,
+            ease: [0.6, 0.05, -0.01, 0.99],
+          },
+        }}
+        exit={{
+          opacity: 0,
+          transition: {
+            duration: 0.6,
+            ease: [0.6, 0.05, -0.01, 0.99],
+          },
+        }}
+        className="svg-wrapper"
+        layout={"position"}
+      >
+        <Logo
+          className="logo"
+          onMouseEnter={() => {
+            document.querySelector(".custom-cursor").classList.add("big");
+          }}
+          onMouseLeave={() => {
+            document.querySelector(".custom-cursor").classList.remove("big");
+          }}
+          onMouseDown={() => {
+            document.querySelector(".custom-cursor").classList.remove("big");
+          }}
+          onClick={() => onClickHandler()}
+        />
         {showTooltip && (
           <FadeInOutWrapper gentle>
             <MouseInteractionWrapper addClass="medium">

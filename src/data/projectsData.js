@@ -19,6 +19,10 @@ export const projectsData = [
           end.
         </p>
         <p>
+          Please play the game in landscape mode when on a mobile device or a
+          device with a screen thats taller than wider.
+        </p>
+        <p>
           TODO if the app grows: store the games in an external database, allow
           reconnecting.
         </p>

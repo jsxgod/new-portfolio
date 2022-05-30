@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { projectsData } from "../data/projectsData";
 import FadeInOutWrapper from "./FadeInOutWrapper";
 import { AiFillCloseCircle } from "react-icons/ai";
+import useWindowDimensions from "../hooks/useWindowDimensions";
 
 const textLeftVariants = {
   rest: {
@@ -26,12 +27,12 @@ textRightVariants.hover.x *= -1;
 const thumbnailLeftVariants = {
   rest: {
     opacity: 0,
-    x: "25%",
+    x: "10%",
     transition: { type: "spring", duration: 1, stiffness: 100 },
   },
   hover: {
     opacity: 0.9,
-    x: "35%",
+    x: "20%",
     transition: { type: "spring", duration: 1, stiffness: 100 },
   },
 };
@@ -96,6 +97,7 @@ const fadeInVariants = {
 const Projects = () => {
   const [showDetails, setShowDetails] = useState(false);
   const [selectedProject, setSelectedProject] = useState(0);
+  const dimensions = useWindowDimensions();
 
   const handleMoveThumbnailWithCursor = (e, element) => {
     const rect = element.getBoundingClientRect();
@@ -264,12 +266,12 @@ const Projects = () => {
               >
                 <div className="carousel left play">
                   {projectsData[selectedProject].stack.map((technology) => (
-                    <span>{technology}</span>
+                    <span key={`${technology}-left`}>{technology}</span>
                   ))}
                 </div>
                 <motion.div className="carousel play" variants={fadeUpVariants}>
                   {projectsData[selectedProject].stack.map((technology) => (
-                    <span>{technology}</span>
+                    <span key={`${technology}-middle`}>{technology}</span>
                   ))}
                 </motion.div>
                 <motion.div
@@ -277,7 +279,7 @@ const Projects = () => {
                   variants={fadeUpVariants}
                 >
                   {projectsData[selectedProject].stack.map((technology) => (
-                    <span>{technology}</span>
+                    <span key={`${technology}-right`}>{technology}</span>
                   ))}
                 </motion.div>
               </motion.div>
@@ -298,7 +300,11 @@ const Projects = () => {
                   src={projectsData[selectedProject].thumbnail}
                   alt="preview"
                   transition={{ duration: 0.6, ease: [0.6, 0.05, -0.01, 0.99] }}
-                  layoutId={`project-${selectedProject}-preview-image`}
+                  layoutId={
+                    dimensions.width > 768
+                      ? `project-${selectedProject}-preview-image`
+                      : ""
+                  }
                 />
               </motion.div>
               <motion.div

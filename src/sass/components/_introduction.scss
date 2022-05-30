@@ -2,6 +2,7 @@
   margin-top: $navbarHeight;
   overflow: hidden;
   grid-column: 1 / 13;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -28,13 +29,18 @@
 }
 
 .scene-wrapper {
-  overflow: visible;
+  overflow: hidden;
   position: absolute;
   top: 0;
   left: 0;
   grid-column: 1 / 13;
-  width: calc(100vw + 2rem);
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  @media (max-width: $tablet) {
+    height: 55vh;
+  }
+  overflow: hidden;
+  z-index: 0;
   canvas {
     opacity: 0.6;
   }

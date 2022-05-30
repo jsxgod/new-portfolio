@@ -1,37 +1,70 @@
-body {
+:root {
   font-size: 16px;
+  @media (max-width: $desktop) {
+    font-size: 16px;
+  }
+  @media (max-width: $phone) {
+    font-size: 12px;
+  }
+}
+body {
+  font-size: 1rem;
   color: $secondaryColor;
   background-color: $backgroundColor;
   overflow-x: hidden;
-  padding: 0px 100px;
+  padding: 0px 32px;
+  @media (max-width: $phone) {
+    padding: 0 32px;
+  }
   cursor: none;
+  @media (max-width: $laptop) {
+    cursor: default;
+  }
   &.no-scroll {
     overflow: hidden;
   }
 }
 
 html {
+  ::-webkit-scrollbar {
+    display: none;
+  }
   .section {
-    min-height: 100vh;
     position: relative;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     column-gap: 20px;
     padding-top: 100px;
     margin-bottom: 4rem;
+    z-index: 1;
     &:last-of-type {
-      margin-bottom: 300px;
+      margin-bottom: 4rem;
+    }
+    @media (min-width: 769px) {
+      min-height: 100vh;
     }
   }
   h1 {
-    font-size: 4rem;
+    font-size: 4vw;
     font-weight: normal;
     letter-spacing: -1px;
+    @media (max-width: $desktop) {
+      font-size: 5vw;
+    }
+    @media (max-width: $phone) {
+      font-size: 6.5vw;
+    }
+    @media (min-width: 1921px) {
+      font-size: 4vw;
+    }
   }
   h2 {
     font-family: "PlusJakartaText Bold";
     font-size: 3.157rem;
     margin-bottom: 1rem;
+    @media (max-width: $tablet) {
+      font-size: 2.5rem;
+    }
   }
   h3 {
     font-family: "PlusJakartaText Light";
@@ -44,12 +77,18 @@ html {
   h5 {
     font-weight: normal;
     font-size: 1.333rem;
+    @media (max-width: $laptop) {
+      font-size: 1rem;
+    }
+    @media (max-width: $phone) {
+      font-size: 0.875rem;
+    }
   }
   p {
     font-family: "PlusJakartaText Regular";
     font-size: 1rem;
     line-height: 24px;
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
     -webkit-font-smoothing: antialiased;
   }
 }

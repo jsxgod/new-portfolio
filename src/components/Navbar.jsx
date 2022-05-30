@@ -3,6 +3,7 @@ import { ReactComponent as Logo } from "../assets/svg/logo_outline.svg";
 import { AnimatePresence, motion } from "framer-motion";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { MouseInteractionWrapper } from "../components";
+import useWindowDimensions from "../hooks/useWindowDimensions";
 
 const navbarLinks = ["about", "projects", "contact", "cv"];
 
@@ -71,15 +72,20 @@ const hamburgerVariants = {
   },
 };
 
-const Navbar = ({ sideLinksLocation }) => {
+const Navbar = ({ sideLinksLocation, mobileMenuOpened, mobileMenuToggler }) => {
   const [showChildren, setShowChildren] = useState(false);
 
   const [oldScrollPosition, setOldScrollPosition] = useState(0);
   const [hide, setHide] = useState(false);
 
-  const handleScroll = () => {
-    const currentScrollPosition = window.scrollY;
+  const dimensions = useWindowDimensions();
 
+  const handleScroll = () => {
+    if (window.innerWidth <= 768) {
+      return;
+    }
+
+    const currentScrollPosition = window.scrollY;
     if (
       //currentScrollPosition > oldScrollPosition &&
       currentScrollPosition >= 200
@@ -103,9 +109,17 @@ const Navbar = ({ sideLinksLocation }) => {
     section?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  const handleOpenMenu = () => {
+    if (window.innerWidth <= 768) {
+      mobileMenuToggler((state) => !state);
+    }
+    setHide(false);
+    document.querySelector(".custom-cursor").classList.remove("medium");
+  };
+
   return (
     <>
-      {hide && (
+      {(hide || dimensions.width <= 768) && (
         <>
           <motion.div className="side-menu-logo">
             <motion.div
@@ -128,20 +142,25 @@ const Navbar = ({ sideLinksLocation }) => {
                   .querySelector(".custom-cursor")
                   .classList.remove("medium")
               }
-              onClick={() => {
-                setHide(false);
-                document
-                  .querySelector(".custom-cursor")
-                  .classList.remove("medium");
-              }}
+              onClick={handleOpenMenu}
               initial="hide"
               animate="show"
               exit="exit"
-              transition={{ staggerChildren: 0.15 }}
+              transition={
+                dimensions.width <= 768
+                  ? { delayChildren: 0.6, staggerChildren: 0.15 }
+                  : { staggerChildren: 0.15 }
+              }
             >
+              <motion.span
+                className={mobileMenuOpened ? "hidden" : ""}
+                variants={hamburgerVariants}
+              ></motion.span>
               <motion.span variants={hamburgerVariants}></motion.span>
-              <motion.span variants={hamburgerVariants}></motion.span>
-              <motion.span variants={hamburgerVariants}></motion.span>
+              <motion.span
+                className={mobileMenuOpened ? "hidden" : ""}
+                variants={hamburgerVariants}
+              ></motion.span>
             </motion.div>
           </motion.div>
           <AnimatePresence>
@@ -171,7 +190,7 @@ const Navbar = ({ sideLinksLocation }) => {
       <nav
         className={`navbar-wrapper block-reveal up ${hide ? "hide" : ""} ${
           window.scrollY >= 200 && "glassmorphism"
-        }`}
+        } ${dimensions.width <= 768 && "mobile-glassmorphism"}`}
         onAnimationEnd={() => setShowChildren(true)}
       >
         <motion.div

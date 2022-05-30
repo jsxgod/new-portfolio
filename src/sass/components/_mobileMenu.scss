@@ -1,0 +1,52 @@
+.mobile-menu-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  backdrop-filter: blur(2px);
+  z-index: 11;
+  width: 100vw;
+  height: 100vh;
+  .menu-options-top {
+    @media (max-width: $tablet) {
+      padding-left: 64px;
+      padding-right: 64px;
+    }
+    @media (max-width: $phone) {
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+    padding-top: $navbarHeight;
+    background-color: $backgroundColor;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    overflow: hidden;
+    .menu-option {
+      font-family: "Monument Regular";
+      font-size: 10vw;
+    }
+  }
+  .menu-options-bottom {
+    @media (max-width: $tablet) {
+      padding-left: 64px;
+      padding-right: 64px;
+    }
+    @media (max-width: $phone) {
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+    padding-bottom: $navbarHeight;
+    background-color: $backgroundColor;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    overflow: hidden;
+    .menu-option {
+      font-family: "Monument Regular";
+      font-size: 10vw;
+    }
+  }
+}

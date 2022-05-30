@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   About,
   Navbar,
@@ -7,11 +7,14 @@ import {
   Projects,
   Contact,
   Footer,
+  MobileMenu,
 } from "../components";
 import Scene from "../components/3D/Scene";
+import useWindowDimensions from "../hooks/useWindowDimensions";
 
 const HomePage = () => {
-  // change variable name
+  const dimensions = useWindowDimensions();
+  const [mobileMenuOpened, setMobileMenuOpened] = useState(false);
   const [navbarAnimationCompleted, setNavbarAnimationCompleted] =
     useState(false);
   useEffect(() => {
@@ -36,7 +39,14 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
-      <Navbar sideLinksLocation={sideLinksLocation} />
+      <Navbar
+        sideLinksLocation={sideLinksLocation}
+        mobileMenuOpened={mobileMenuOpened}
+        mobileMenuToggler={setMobileMenuOpened}
+      />
+      <AnimatePresence>
+        {dimensions.width <= 768 && mobileMenuOpened && <MobileMenu />}
+      </AnimatePresence>
       {loadCanvas && (
         <motion.div
           className="scene-wrapper"
@@ -56,10 +66,12 @@ const HomePage = () => {
           <About />
           <Projects />
           <Contact />
-          <Footer
-            sideLinksLocation={sideLinksLocation}
-            changeLocation={handleChangeSideLinksLocation}
-          />
+          {dimensions.width > 992 && (
+            <Footer
+              sideLinksLocation={sideLinksLocation}
+              changeLocation={handleChangeSideLinksLocation}
+            />
+          )}
         </>
       )}
     </div>

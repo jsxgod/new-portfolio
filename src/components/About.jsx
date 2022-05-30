@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import FadeInOutWrapper from "./FadeInOutWrapper";
+import useWindowDimensions from "../hooks/useWindowDimensions";
 
 const cardOffsets = [5, 0, -5];
 
@@ -16,6 +17,7 @@ const About = () => {
   const [hideIcon, setHideIcon] = useState(false);
   const [blockScroll, setBlockScroll] = useState(false);
   const [animateCards, setAnimateCards] = useState(false);
+  const dimensions = useWindowDimensions();
 
   const handleWheel = (e) => {
     // scroll down
@@ -41,7 +43,18 @@ const About = () => {
     }
   };
 
+  const handleTap = () => {
+    if (dimensions.width <= 768) {
+      setTechnologies((technologies) =>
+        technologies.slice(1).concat(technologies.slice(0, 1))
+      );
+    }
+  };
+
   const handleClick = () => {
+    if (dimensions.width <= 768) {
+      return;
+    }
     if (animateCards) {
       setAnimateCards(false);
       document.querySelector(".custom-cursor").classList.remove("scroll");
@@ -61,10 +74,21 @@ const About = () => {
             <FadeInOutWrapper once={false}>
               <h2>About me</h2>
               <p>
-                I'm a web developer – learn more about me and my interests. I'm
-                available for web projects and based in Wrocław, Poland. Feel
-                free to get in touch at the bottom of the page if you're
-                interested in working together.
+                My main interests are coding and web design. I like building
+                good looking sites that are thoughtful and interactive. In the
+                future I would like to craft amazing web experiences that spark
+                joy. Further down the road of my career I hope to gain excellent
+                knowledge of the web development eco system as well as dive
+                deeper into 3D and design.
+              </p>
+              <p>
+                My hobbies beside programming are video games, music, chess and
+                rubik's cube speedsolving.
+              </p>
+              <p>
+                I'm available for web projects remotely or on site in Wrocław,
+                Poland. Feel free to get in touch at the bottom of the page if
+                you're interested in working together.
               </p>
             </FadeInOutWrapper>
           </div>
@@ -87,7 +111,7 @@ const About = () => {
           <FadeInOutWrapper once={false}>
             <h2>Technological stack</h2>
           </FadeInOutWrapper>
-          <div
+          <motion.div
             className={`technology-showcase-wrapper ${
               animateCards ? "animate-cards" : ""
             }`}
@@ -104,14 +128,15 @@ const About = () => {
                 .classList.remove("explore");
               document.querySelector("body").classList.remove("no-scroll");
             }}
-            onClick={() => handleClick()}
+            onClick={handleClick}
             onWheel={(e) => handleWheel(e)}
           >
             {cardOffsets.map((offset, i) => (
               <motion.div
-                key={i}
+                key={"tech-stack-card-" + i}
                 className="card"
                 style={{ top: `${50 + offset}%`, zIndex: { i } }}
+                onTap={handleTap}
               >
                 <motion.img
                   src={technologies[i].icon}
@@ -120,7 +145,7 @@ const About = () => {
                 />
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

@@ -1,19 +1,20 @@
 .intro-logo-wrapper {
   padding: 1rem;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 40%;
-  height: 50%;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  justify-content: center;
+  align-items: center;
   .svg-wrapper {
-    width: 100%;
+    width: 50%;
+    @media (max-width: $phone) {
+      width: calc(100% - 64px);
+    }
     .logo {
       z-index: 1;
       overflow: visible;
+      width: 100%;
       &:hover {
         path {
           transform: scale(1.1);
@@ -29,9 +30,10 @@
     }
   }
   .tooltip-wrapper {
+    color: $secondaryColor;
     z-index: 2;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     padding: 0.5rem;
     &:hover {
@@ -50,24 +52,4 @@
       transition: transform 0.3s ease-in-out;
     }
   }
-  /*
-    .drawn-logo {
-      border: 1px solid blue;
-      transform: scale(2);
-      * {
-        stroke: $logoOutlineColor;
-      }
-      path {
-        stroke-dasharray: 2000; // one big stroke
-        stroke-dashoffset: 2000; // offset to hide the whole shape
-        animation: reveal 1s ease-in forwards, draw 2s linear forwards;
-        animation-delay: 0.5s;
-      }
-      @keyframes draw {
-        to {
-          stroke-dashoffset: 0;
-        }
-      }
-    }
-  */
 }
