@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 
 const options = ["About", "Projects", "Contact", "CV"];
@@ -42,10 +42,15 @@ const bottomVariants = {
   },
 };
 
-const MobileMenu = () => {
-  useEffect(() => {
-    console.log("mobile menu");
-  }, []);
+const MobileMenu = ({ handleClose }) => {
+  const handleScrollToSection = (sectionName) => {
+    handleClose();
+    setTimeout(() => {
+      const section = document.getElementById(`${sectionName}-section`);
+      section?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 300);
+  };
+
   return (
     <motion.div
       initial={{ backdropFilter: "blur(0px)" }}
@@ -66,6 +71,7 @@ const MobileMenu = () => {
             key={"mobile-menu-option-#" + option}
             variants={menuItemVariants}
             className="menu-option"
+            onClick={() => handleScrollToSection(option.toLowerCase())}
           >
             {option}
           </motion.li>
@@ -84,6 +90,7 @@ const MobileMenu = () => {
             key={"mobile-menu-option-#" + option}
             variants={menuItemVariants}
             className="menu-option"
+            onClick={() => handleScrollToSection(option.toLowerCase())}
           >
             {option}
           </motion.li>
