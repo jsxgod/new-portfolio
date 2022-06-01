@@ -10,17 +10,13 @@ import * as htmlToImage from "html-to-image";
 import Toolbox from "./Toolbox";
 import axios from "axios";
 
-const ContactForm = ({
-  selectedColor,
-  handleChangeColor,
-  handleEmailSent,
-  dimensions,
-}) => {
+const ContactForm = ({ selectedColor, handleChangeColor, dimensions }) => {
   const canvasData = useRef(null);
   const [selectedSide, setSelectedSide] = useState("left");
   const [loadForEdit, setLoadForEdit] = useState(false);
   const [showLoading, setShowLoading] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
+  const [emailError, setEmailError] = useState(false);
 
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
@@ -59,6 +55,9 @@ const ContactForm = ({
         }
       })
       .catch((error) => {
+        setEmailSent(true);
+        setEmailError(true);
+        setShowLoading(false);
         console.log("ERROR: %s", error);
       });
   };
@@ -155,14 +154,18 @@ const ContactForm = ({
         className={`contact-form-container ${
           selectedSide === "left" ? "noise" : "paper"
         }`}
-        style={{ pointerEvents: (showLoading || emailSent) && "none" }}
+        style={{
+          pointerEvents: (showLoading || emailSent) && !emailError && "none",
+        }}
       >
         <div
           className={`selection-wrapper ${
             selectedSide === "left" ? "active" : ""
           }`}
         >
-          <MouseInteractionWrapper addClass="medium">
+          <MouseInteractionWrapper
+            addClass={selectedSide === "left" ? null : "medium"}
+          >
             <span onClick={() => setSelectedSide("left")}>
               standard
               {selectedSide === "left" && (
@@ -179,8 +182,16 @@ const ContactForm = ({
             selectedSide === "right" ? "active" : ""
           }`}
         >
-          <MouseInteractionWrapper addClass="medium">
-            <span onClick={() => setSelectedSide("right")}>
+          <MouseInteractionWrapper
+            addClass={selectedSide === "right" || emailError ? null : "medium"}
+          >
+            <span
+              onClick={() => {
+                if (!emailError) {
+                  setSelectedSide("right");
+                }
+              }}
+            >
               paper
               {selectedSide === "right" && (
                 <motion.div
@@ -271,13 +282,15 @@ const ContactForm = ({
             className="send-wrapper"
             style={{ pointerEvents: (showLoading || emailSent) && "none" }}
           >
-            <MouseInteractionWrapper addClass="medium">
+            <MouseInteractionWrapper
+              addClass={showLoading || emailSent ? null : "medium"}
+            >
               <input
                 className="send-button"
                 type="submit"
                 value="send"
                 form="contact-form"
-                disabled={showLoading}
+                disabled={showLoading || emailSent}
               />
             </MouseInteractionWrapper>
           </div>
@@ -350,25 +363,43 @@ const ContactForm = ({
                     exit: { opacity: 0 },
                   }}
                 >
-                  Email sent
+                  {emailError ? "Email error" : "Email sent"}
                 </motion.h2>
               </div>
               <div className="header-text-wrapper">
-                <motion.h3
-                  variants={{
-                    hide: { y: "4rem" },
-                    show: {
-                      y: 0,
-                      transition: {
-                        duration: 0.75,
-                        ease: "easeInOut",
+                {emailError ? (
+                  <motion.p
+                    variants={{
+                      hide: { y: "4rem" },
+                      show: {
+                        y: 0,
+                        transition: {
+                          duration: 0.75,
+                          ease: "easeInOut",
+                        },
                       },
-                    },
-                    exit: { opacity: 0 },
-                  }}
-                >
-                  Thanks for reaching out
-                </motion.h3>
+                      exit: { opacity: 0 },
+                    }}
+                  >
+                    You can reach me directly at kacpersmyczyk@gmail.com
+                  </motion.p>
+                ) : (
+                  <motion.h3
+                    variants={{
+                      hide: { y: "4rem" },
+                      show: {
+                        y: 0,
+                        transition: {
+                          duration: 0.75,
+                          ease: "easeInOut",
+                        },
+                      },
+                      exit: { opacity: 0 },
+                    }}
+                  >
+                    Thanks for reaching out
+                  </motion.h3>
+                )}
               </div>
             </motion.div>
           </motion.div>
