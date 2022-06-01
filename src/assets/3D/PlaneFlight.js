@@ -14,7 +14,7 @@ export default function Model({ clickHandler, ...props }) {
 
   const group = useRef();
   const paperPlane = useRef();
-  const { nodes, materials, animations } = useGLTF("/plane_flight.gltf");
+  const { nodes, animations } = useGLTF("/plane_flight.gltf");
   const { actions, mixer } = useAnimations(animations, group);
   const { camera } = useThree();
 
@@ -24,7 +24,7 @@ export default function Model({ clickHandler, ...props }) {
     flight.setLoop(LoopOnce);
     flight.clampWhenFinished = true;
     flight.play();
-    mixer.timeScale = 0.9;
+    mixer.timeScale = 1;
     mixer.addEventListener("finished", () => {
       setScaleUp(true);
     });
