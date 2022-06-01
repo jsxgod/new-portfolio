@@ -38,26 +38,44 @@ const DrawingCanvas = ({
   }, [color]);
 
   const startDrawing = (event) => {
-    const x = event.nativeEvent.offsetX;
-    const y = event.nativeEvent.offsetY;
+    let x = event.nativeEvent.offsetX;
+    let y = event.nativeEvent.offsetY;
+    if (event.nativeEvent.type === "touchstart") {
+      const rect = event.target.getBoundingClientRect();
+      x =
+        ((event.touches[0].clientX - rect.x) / rect.width) *
+        event.target.offsetWidth;
+      y =
+        ((event.touches[0].clientY - rect.y) / rect.height) *
+        event.target.offsetHeight;
+    }
     canvasContextRef.current.beginPath();
     canvasContextRef.current.moveTo(x, y);
     setIsDrawing(true);
-  };
-
-  const stopDrawing = () => {
-    canvasContextRef.current.closePath();
-    setIsDrawing(false);
   };
 
   const draw = (event) => {
     if (!isDrawing) {
       return;
     }
-    const x = event.nativeEvent.offsetX;
-    const y = event.nativeEvent.offsetY;
+    let x = event.nativeEvent.offsetX;
+    let y = event.nativeEvent.offsetY;
+    if (event.nativeEvent.type === "touchmove") {
+      const rect = event.target.getBoundingClientRect();
+      x =
+        ((event.touches[0].clientX - rect.x) / rect.width) *
+        event.target.offsetWidth;
+      y =
+        ((event.touches[0].clientY - rect.y) / rect.height) *
+        event.target.offsetHeight;
+    }
     canvasContextRef.current.lineTo(x, y);
     canvasContextRef.current.stroke();
+  };
+
+  const stopDrawing = () => {
+    canvasContextRef.current.closePath();
+    setIsDrawing(false);
   };
 
   return (
@@ -70,6 +88,9 @@ const DrawingCanvas = ({
       onMouseDown={(e) => startDrawing(e)}
       onMouseUp={() => stopDrawing()}
       onMouseMove={(e) => draw(e)}
+      onTouchStart={(e) => startDrawing(e)}
+      onTouchMove={(e) => draw(e)}
+      onTouchEnd={() => stopDrawing()}
       onMouseEnter={() => {
         document.querySelector(".custom-cursor").classList.add("brush");
         document.querySelector(".custom-cursor").style.backgroundColor = color;
