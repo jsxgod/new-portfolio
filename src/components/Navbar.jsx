@@ -105,8 +105,12 @@ const Navbar = ({ sideLinksLocation, mobileMenuOpened, mobileMenuToggler }) => {
   }, [oldScrollPosition]);
 
   const handleScrollToSection = (sectionName) => {
-    const section = document.getElementById(`${sectionName}-section`);
-    section?.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (sectionName === "introduction") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      const section = document.getElementById(`${sectionName}-section`);
+      section?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   const handleOpenMenu = () => {
@@ -174,12 +178,24 @@ const Navbar = ({ sideLinksLocation, mobileMenuOpened, mobileMenuToggler }) => {
               >
                 <motion.span className="side-link" variants={linksVariants}>
                   <MouseInteractionWrapper addClass="medium">
-                    <FaGithub />
+                    <a
+                      href={"https://github.com/jsxgod"}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <FaGithub />
+                    </a>
                   </MouseInteractionWrapper>
                 </motion.span>
                 <motion.span className="side-link" variants={linksVariants}>
                   <MouseInteractionWrapper addClass="medium">
-                    <FaLinkedin />
+                    <a
+                      href={"https://www.linkedin.com/in/kacper-smyczyk/"}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <FaLinkedin />
+                    </a>
                   </MouseInteractionWrapper>
                 </motion.span>
               </motion.div>
