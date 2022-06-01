@@ -52,7 +52,7 @@
     position: relative;
     grid-column: 6 / 12;
     @media (max-width: $desktop) {
-      grid-column: 1 / 11;
+      grid-column: 2 / 11;
       grid-row: 2 / 5;
     }
     @media (max-width: $tablet) {
@@ -62,6 +62,9 @@
     width: 100%;
     height: 90%;
     padding: 0 4rem;
+    @media (max-width: $tablet) {
+      padding: 0;
+    }
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 3rem auto 3rem;
@@ -127,13 +130,17 @@
     .form-wrapper {
       z-index: 1;
       grid-area: form;
+      @media (max-width: $tablet) {
+        transform: translateY(-2rem);
+        height: calc(100% + 2rem);
+      }
       width: 100%;
       height: 100%;
       padding: 1.333rem;
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 50px 50px 50px auto;
-      column-gap: 20px;
+      column-gap: 1.25rem;
       row-gap: 32px;
       background: rgba(grey, 0.05);
       box-shadow: 0 0 4px 4px rgba(grey, 0.02);
@@ -144,9 +151,10 @@
         flex-direction: column;
         row-gap: 4px;
         position: relative;
+        border-bottom: 1px solid rgba($secondaryColor, 0.3);
         .border {
           position: absolute;
-          bottom: 4px;
+          bottom: -1px;
           left: 50%;
           width: 10px;
           height: 1px;
@@ -185,7 +193,6 @@
           font-size: 1rem;
           color: $secondaryColor;
           border: none;
-          border-bottom: 1px solid rgba($secondaryColor, 0.3);
           padding: 4px;
           margin-bottom: 2rem;
           background-color: transparent;
@@ -338,6 +345,9 @@
       align-items: center;
       grid-area: send;
       transform: translateY(100%);
+      @media (max-width: $phone) {
+        transform: translateY(0%);
+      }
       &.right {
         grid-column: 3 / 5;
       }

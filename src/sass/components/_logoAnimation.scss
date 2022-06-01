@@ -1,7 +1,11 @@
 .intro-logo-wrapper {
   padding: 1rem;
   width: 100vw;
-  height: 100vh;
+  height: 80vh;
+  @media (min-width: $laptop) {
+    height: 100vh;
+  }
+  margin-bottom: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Canvas, extend } from "@react-three/fiber";
+import { extend } from "@react-three/fiber";
 import CustomShaderMaterial from "../../shaders/CustomShaderMaterial";
 import Wave from "./Wave";
 import { MotionCanvas } from "framer-motion-3d";
@@ -9,7 +9,7 @@ const Scene = () => {
   return (
     <MotionCanvas camera={{ fov: 10 }}>
       <Suspense fallback={null}>
-        <Wave />
+        <Wave cancelNoise={window.innerWidth <= 768} />
       </Suspense>
     </MotionCanvas>
   );

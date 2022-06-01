@@ -1,9 +1,11 @@
-import React, { Suspense, useState, useEffect } from "react";
+import React, { Suspense, useState } from "react";
 import PlaneFlight from "../assets/3D/PlaneFlight";
 import { AnimatePresence, motion } from "framer-motion";
 import { LayoutCamera, MotionCanvas } from "framer-motion-3d";
 import { FadeInOutWrapper, ContactForm } from "../components";
+import { FaArrowRight } from "react-icons/fa";
 import useWindowDimensions from "../hooks/useWindowDimensions";
+import MouseInteractionWrapper from "./MouseInteractionWrapper";
 
 const Contact = () => {
   const [playAnimation, setPlayAnimation] = useState(false);
@@ -31,6 +33,14 @@ const Contact = () => {
         <div className="contact-header-wrapper">
           <FadeInOutWrapper once>
             <h2>Contact</h2>
+            {dimensions.width > 1200 && showAnimation && (
+              <MouseInteractionWrapper addClass="small">
+                <span className="skip-tooltip" onClick={handleHideAnimation}>
+                  <p>skip</p>
+                  <FaArrowRight className="arrow" />
+                </span>
+              </MouseInteractionWrapper>
+            )}
           </FadeInOutWrapper>
         </div>
         <AnimatePresence exitBeforeEnter>

@@ -15,27 +15,57 @@ import useWindowDimensions from "../hooks/useWindowDimensions";
 const HomePage = () => {
   const dimensions = useWindowDimensions();
   const [mobileMenuOpened, setMobileMenuOpened] = useState(false);
+  const [loadCanvas, setLoadCanvas] = useState(false);
+  const [sideLinksLocation, setSideLinksLocation] = useState("sidebar");
   const [navbarAnimationCompleted, setNavbarAnimationCompleted] =
     useState(false);
+
   useEffect(() => {
     document.querySelector(".custom-cursor").classList.remove("big");
     setTimeout(() => {
       setNavbarAnimationCompleted(true);
     }, 600);
   }, []);
-  const [loadCanvas, setLoadCanvas] = useState(false);
-
-  const [sideLinksLocation, setSideLinksLocation] = useState("sidebar");
-
-  const handleChangeSideLinksLocation = (location) => {
-    setSideLinksLocation(location);
-  };
 
   useEffect(() => {
     setTimeout(() => {
       setLoadCanvas(true);
     }, 1200);
   }, []);
+
+  useEffect(() => {
+    document.body.addEventListener(
+      "touchstart",
+      function (e) {
+        if (e.target.id === "drawing-board") {
+          e.preventDefault();
+        }
+      },
+      { passive: false }
+    );
+    document.body.addEventListener(
+      "touchend",
+      function (e) {
+        if (e.target.id === "drawing-board") {
+          e.preventDefault();
+        }
+      },
+      { passive: false }
+    );
+    document.body.addEventListener(
+      "touchmove",
+      function (e) {
+        if (e.target.id === "drawing-board") {
+          e.preventDefault();
+        }
+      },
+      { passive: false }
+    );
+  }, []);
+
+  const handleChangeSideLinksLocation = (location) => {
+    setSideLinksLocation(location);
+  };
 
   return (
     <div className="home-page">
@@ -45,7 +75,9 @@ const HomePage = () => {
         mobileMenuToggler={setMobileMenuOpened}
       />
       <AnimatePresence>
-        {dimensions.width <= 768 && mobileMenuOpened && <MobileMenu />}
+        {dimensions.width <= 768 && mobileMenuOpened && (
+          <MobileMenu handleClose={() => setMobileMenuOpened(false)} />
+        )}
       </AnimatePresence>
       {loadCanvas && (
         <motion.div
