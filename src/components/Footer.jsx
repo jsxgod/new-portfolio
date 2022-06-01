@@ -50,12 +50,24 @@ const Footer = ({ sideLinksLocation, changeLocation }) => {
           >
             <motion.span className="footer-link" variants={linksVariants}>
               <MouseInteractionWrapper addClass="medium">
-                <FaLinkedin />
+                <a
+                  href={"https://www.linkedin.com/in/kacper-smyczyk/"}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <FaLinkedin />
+                </a>
               </MouseInteractionWrapper>
             </motion.span>
             <motion.span className="footer-link" variants={linksVariants}>
               <MouseInteractionWrapper addClass="medium">
-                <FaGithub />
+                <a
+                  href={"https://github.com/jsxgod"}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <FaGithub />
+                </a>
               </MouseInteractionWrapper>
             </motion.span>
           </motion.div>
