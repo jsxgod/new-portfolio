@@ -5,22 +5,6 @@ import { FaArrowRight } from "react-icons/fa";
 import { MouseInteractionWrapper } from "../components";
 import FadeInOutWrapper from "./FadeInOutWrapper";
 
-const variants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      delay: 0.6,
-      duration: 0.6,
-      ease: [0.6, 0.05, -0.01, 0.99],
-    },
-  },
-  hide: {
-    opacity: 0,
-    transition: { duration: 0.5, ease: [0.6, 0.05, -0.01, 0.99] },
-  },
-};
-
 const LogoButton = ({ onClickHandler }) => {
   const [showTooltip, setShowTooltip] = useState(false);
 
