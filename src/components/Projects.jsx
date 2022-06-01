@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { projectsData } from "../data/projectsData";
 import FadeInOutWrapper from "./FadeInOutWrapper";

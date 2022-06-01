@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
-import { ScrollExploreInfo } from "../components";
-import Scene from "../components/3D/Scene";
+import React from "react";
 import useWindowDimensions from "../hooks/useWindowDimensions";
 
 const fadeUpVariants = {
