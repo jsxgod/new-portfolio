@@ -12,6 +12,14 @@
     width: 100px;
     .footer-link {
       font-size: 2rem;
+      a {
+        color: $secondaryColor;
+        text-decoration: none;
+        &:hover {
+          color: $secondaryColor;
+          cursor: none;
+        }
+      }
     }
   }
   .footer-credits-wrapper {
