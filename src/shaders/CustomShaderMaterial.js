@@ -9,6 +9,7 @@ const CustomShaderMaterial = shaderMaterial(
     uColor: new THREE.Color(0.0, 0.0, 0.0),
     uTexture: new THREE.Texture(),
     uSlowDownFactor: 1.0,
+    uNoiseAmp: 0.25,
   },
 
   //Vertex Shader
@@ -17,6 +18,7 @@ const CustomShaderMaterial = shaderMaterial(
     precision mediump float;
     uniform float uTime;
     uniform float uSlowDownFactor;
+    uniform float uNoiseAmp;
 
     #pragma glslify: snoise3 = require(glsl-noise/simplex/3d);
 
@@ -24,9 +26,11 @@ const CustomShaderMaterial = shaderMaterial(
       vUv = uv;
       vec3 pos = position;
       float noiseFreq = 1.5;
-      float noiseAmp = 0.25;
+      //float noiseAmp = 0.25;
       vec3 noisePos = vec3(pos.x * noiseFreq + uTime / uSlowDownFactor, pos.y, pos.z);
-      pos.z += snoise3(noisePos) * noiseAmp;
+      if(uNoiseAmp > 0.0) {
+        pos.z = pos.z + snoise3(noisePos) * uNoiseAmp;
+      }
 
       gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
     }
