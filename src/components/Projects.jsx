@@ -134,7 +134,7 @@ const Projects = () => {
     <div className="section" id="projects-section">
       <div className="projects-wrapper">
         <div className="header-wrapper">
-          <FadeInOutWrapper once={showDetails}>
+          <FadeInOutWrapper once={true}>
             <h2>Projects</h2>
           </FadeInOutWrapper>
         </div>
