@@ -1,5 +1,4 @@
-import { useTexture } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useLoader } from "@react-three/fiber";
 import React, { useRef } from "react";
 import * as THREE from "three";
 import textureImage from "../../assets/splash-mirror.jpg";
@@ -12,7 +11,7 @@ const Wave = ({ cancelNoise }) => {
   });
 
   //const imageTexture = useLoader(THREE.TextureLoader, textureImage);
-  const imageTexture = useTexture(textureImage);
+  const imageTexture = useLoader(THREE.TextureLoader, textureImage);
   const { degToRad } = THREE.MathUtils;
 
   return (
