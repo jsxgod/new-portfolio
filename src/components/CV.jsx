@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FaArrowLeft, FaArrowRight, FaRegWindowClose } from "react-icons/fa";
 import { AnimatePresence, motion } from "framer-motion";
 import cv1 from "../assets/images/cv/CV.png";
