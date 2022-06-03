@@ -38,6 +38,9 @@ html {
     margin-bottom: 4rem;
     z-index: 1;
     &:last-of-type {
+      @media (max-width: $tablet) {
+        margin-bottom: 1rem;
+      }
       margin-bottom: 4rem;
     }
     @media (max-width: $tablet) {
@@ -60,6 +63,15 @@ html {
     padding-top: 6.25rem;
     @media (max-width: $phone) {
       padding-top: 4rem;
+    }
+  }
+  #cv-section {
+    grid-template-rows: 15% auto;
+    @media (max-width: $tablet) {
+      grid-template-rows: 10% 5% auto;
+    }
+    @media (max-width: $phone) {
+      grid-template-rows: 15% 5% auto;
     }
   }
   h1 {
