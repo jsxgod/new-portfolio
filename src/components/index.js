@@ -13,3 +13,4 @@ export { default as Toolbox } from "./Toolbox";
 export { default as MouseInteractionWrapper } from "./MouseInteractionWrapper";
 export { default as Footer } from "./Footer";
 export { default as MobileMenu } from "./MobileMenu";
+export { default as CV } from "./CV";
