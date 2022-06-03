@@ -125,16 +125,21 @@ const Navbar = ({ sideLinksLocation, mobileMenuOpened, mobileMenuToggler }) => {
     <>
       {(hide || dimensions.width <= 768) && (
         <>
-          <motion.div className="side-menu-logo">
+          <MouseInteractionWrapper addClass="small">
             <motion.div
-              initial="hide"
-              animate="show"
-              variants={hamburgerVariants}
-              className="side-logo-wrapper"
+              className="side-menu-logo"
+              onClick={() => handleScrollToSection("introduction")}
             >
-              <Logo className="side-logo" />
+              <motion.div
+                initial="hide"
+                animate="show"
+                variants={hamburgerVariants}
+                className="side-logo-wrapper"
+              >
+                <Logo className="side-logo" />
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </MouseInteractionWrapper>
           <motion.div className="side-menu-button">
             <motion.div
               className="menu-button-wrapper"
