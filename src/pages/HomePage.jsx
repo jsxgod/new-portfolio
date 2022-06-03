@@ -8,6 +8,7 @@ import {
   Contact,
   Footer,
   MobileMenu,
+  CV,
 } from "../components";
 import Scene from "../components/3D/Scene";
 import useWindowDimensions from "../hooks/useWindowDimensions";
@@ -98,6 +99,7 @@ const HomePage = () => {
           <About />
           <Projects />
           <Contact />
+          <CV />
           {dimensions.width > 992 && (
             <Footer
               sideLinksLocation={sideLinksLocation}
