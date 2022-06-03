@@ -6,6 +6,9 @@
   @media (max-width: $phone) {
     font-size: 14px;
   }
+  @media (max-width: 350px) {
+    font-size: 11px;
+  }
 }
 body {
   font-size: 1rem;
@@ -117,7 +120,7 @@ html {
   p {
     font-family: "PlusJakartaText Regular";
     font-size: 1rem;
-    line-height: 24px;
+    line-height: 1.5rem;
     margin-bottom: 1rem;
     -webkit-font-smoothing: antialiased;
   }
