@@ -98,6 +98,23 @@
         font-size: 0.75rem;
       }
     }
+    &.zoom {
+      width: 20px;
+      height: 20px;
+    }
+    &.close {
+      width: 75px;
+      height: 75px;
+      &::after {
+        position: relative;
+        top: calc(50% - 0.5rem);
+        left: calc(50% - 0.3rem);
+        color: $defaultColor;
+        content: "X";
+        font-family: "Monument Ultra Bold";
+        font-size: 0.6rem;
+      }
+    }
   }
 }
 .no-pointer-events {
