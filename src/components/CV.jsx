@@ -13,7 +13,7 @@ const options = [
     id: 0,
     name: "Color",
     mobileName: "color",
-    link: "https://drive.google.com/file/d/1LHlStCLl3nMofsmfCZ0DYh45pVDebvOd/view?usp=sharing",
+    link: "https://drive.google.com/file/d/1nYr7mFUr50Z1OcZzll6zf2J5oTinESHu/view?usp=sharing",
     image: cv1,
   },
   {
