@@ -14,7 +14,6 @@
 - framer-motion
 - three.js (r3f)
 - glsl
-- 
 
 #### back-end (https://github.com/jsxgod/email-server)
 
