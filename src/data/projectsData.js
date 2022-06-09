@@ -82,7 +82,7 @@ export const projectsData = [
   },
   {
     name: "skate shop",
-    thumbnail: "https://i.imgur.com/AFY9TWt.png",
+    thumbnail: "https://i.imgur.com/UN547fv.png",
     description: (
       <>
         <p>
